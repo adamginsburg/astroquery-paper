@@ -10,9 +10,38 @@ In the past few decades, blind surveys have played a huge role in advancing our
 understanding of the universe.
 
 Data sharing has taken on a variety of forms.  The most prominent are the major
-observatory archives: MAST, NOAO, ESO, IPAC, CADC, CDS, NRAO are the main
+observatory archives: MAST, NOAO, ESO, IPAC, CADC, CDS (hosting Vizier and
+SIMBAD), NRAO, CXC, HEASARC, ESA are the main
 organizations hosting raw and processed data from ground and space based
 telescopes.  These data archive also serve as the primary means for serving data
 to users when the data are taken in queue mode, i.e., when the data are taken
 while the observer is not on-site.
 
+In addition to observatories and telescopes, individual surveys often share
+their full data sets.  In some cases, these data sets are shared via the
+observatory that acquired them - for example, the all-sky data acquired with
+Planck, WMAP, and COBE delivered a variety of data products as part of the
+mission.  Other surveys, particularly ground-based surveys, serve their own
+data.  Examples include SDSS, UKIDSS, ...
+
+Individual teams and small groups will often share their data.
+These services do not follow any particular standard and can be widely
+varied in the type and amount of data shared.
+
+Finally, there are other data types relevant to astronomy that are not
+served by the typical astronomical databases.  Examples include molecular
+and atomic properties.
+
+Astroquery arose from a desire to access these databases from the command line
+in a scriptable fashion.  Script-based data access provides astronomers with
+the ability to make reproducible analysis scripts in which the data are
+acquired and processed into scientifically relevant results with minimal
+overhead.
+
+The Virtual Observatory has some overlap with astroquery, but it does not
+provide the simple tools many astronomers find necessary in day-to-day work.
+Additionally, many of the services noted above do not support VO standards or
+protocols and are therefore inaccessible to the VO.
+
+
+\section{Astroquery}
