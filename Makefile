@@ -15,5 +15,6 @@ all: main.tex
 main: 
 	echo "texpath: ${texpath}"
 	${PDFLATEX} main.tex
+	cp authorea_build/authorea_paper.pdf main.pdf
 	gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=main_compressed.pdf main.pdf
 

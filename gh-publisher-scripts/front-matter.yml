@@ -13,7 +13,7 @@ abstract: Astroquery is a pretty cool tool
 # This controls which file is shown on the right-hand side of the published
 # HTML page.  By default it will take the first PDF or HTML file that it
 # finds.  If that doesn't work for you, you can specify the correct file here.
-iframe_src: authorea_build/authorea_paper.pdf
+iframe_src: main_compressed.pdf
 
 # You can specify multiple authors, just follow the pattern below.
 # These fields can contain HTML tags.  You probably want to put <br />
