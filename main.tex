@@ -45,6 +45,29 @@ protocols and are therefore inaccessible to the VO.
 
 
 \section{The Software}
+Astroquery consists of a collection of modules that mostly share a similar interface,
+but are meant to be used independently.  They are primarily based on a common framework
+that uses the python \texttt{requests} package to perform HTTP requests to communicate
+with web services.
+
+For new development, there is a \texttt{template}  that lays out the basic
+framework of any new module.  All modules are based on having a single core
+\texttt{class} that will have some number of \texttt{query\_*} methods.
+The most common query methods are \texttt{query\_region}, which usually provide
+a ``cone search'' functionality, i.e., they search for data within a circularly
+symmetric region projected on the sky.
+
+An example using the SIMBAD interface is shown below (see
+\url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}):
+\begin{lstlisting}
+
+    from astroquery.simbad import Simbad
+    result_table = Simbad.query_region("m81")
+
+\end{lstlisting}
+In this example, \texttt{Simbad} is an instance of the
+\texttt{astroquery.simbad.SimbadClass} class.
+The returned result, stored in the variable \texttt{result\_table},
 
 \section{The development model}
 Astroquery has received contributions from 53 people as of June 2017.
@@ -53,3 +76,5 @@ most individual modules have been implemented independently by interested volunt
 Additionally, astroquery has received support from the Google Summer of Code
 program, with three students (coauthors Madhura Parikh, Simon Liedtke, and Ayush Yadav)
 from 2013-2017.
+
+
