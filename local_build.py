@@ -243,7 +243,7 @@ def build_authorea_latex(localdir, builddir, latex_exec, bibtex_exec, outname,
 
     if dobuild:
         #now actually run latex/bibtex
-        args = [latex_exec, outname + '.tex']
+        args = latex_exec.split() + [outname + '.tex']
         print('\n\RUNNING THIS COMMAND: "{0}"\n'.format(' '.join([latex_exec, outname + '.tex'])))
         subprocess.check_call(args, cwd=builddir)
         if dobibtex:
@@ -251,7 +251,7 @@ def build_authorea_latex(localdir, builddir, latex_exec, bibtex_exec, outname,
             print('\n\RUNNING THIS COMMAND: "{0}"\n'.format(' '.join([latex_exec, outname + '.tex'])))
             subprocess.check_call(args, cwd=builddir)
         for _ in range(npostbibcalls):
-            args = [latex_exec, outname + '.tex']
+            args = latex_exec + [outname + '.tex']
             print('\n\RUNNING THIS COMMAND: "{0}"\n'.format(' '.join([latex_exec, outname + '.tex'])))
             subprocess.check_call(args, cwd=builddir)
 
@@ -280,7 +280,7 @@ if __name__ == '__main__':
                              ' files in. Default to the current directory.')
     parser.add_argument('--build-dir', '-d', default='authorea_build',
                         help='the directory to build the paper in')
-    parser.add_argument('--latex', '-l', default='pdflatex',
+    parser.add_argument('--latex', '-l', default='pdflatex  -halt-on-error -synctex=1 --interaction=nonstopmode',
                         help='The executable to use for the latex build step.')
     parser.add_argument('--bibtex', '-b', default='bibtex',
                         help='The executable to use for the bibtex build step.')
