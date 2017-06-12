@@ -251,7 +251,7 @@ def build_authorea_latex(localdir, builddir, latex_exec, bibtex_exec, outname,
             print('\n\RUNNING THIS COMMAND: "{0}"\n'.format(' '.join([latex_exec, outname + '.tex'])))
             subprocess.check_call(args, cwd=builddir)
         for _ in range(npostbibcalls):
-            args = latex_exec + [outname + '.tex']
+            args = latex_exec.split() + [outname + '.tex']
             print('\n\RUNNING THIS COMMAND: "{0}"\n'.format(' '.join([latex_exec, outname + '.tex'])))
             subprocess.check_call(args, cwd=builddir)
 
