@@ -7,7 +7,7 @@ before_install:
 - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 - tar xzvf install-tl-unx.tar.gz
 - cd install-tl-*
-- ./install-tl
+- ./install-tl -v
 - cd ..
 - yes "" | sudo add-apt-repository ppa:jonathonf/texlive-2016
 - sudo apt-get update -y
