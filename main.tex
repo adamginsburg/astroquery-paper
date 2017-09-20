@@ -1,6 +1,17 @@
+
 If and when a paper on astroquery is written, we'll use this article (and its
 related github repo: https://github.com/adamginsburg/astroquery-paper) as the
 basis.  However, it is not even a work in progress yet.
+
+\begin{abstract}
+Astroquery is a collection of tools for requesting data from databases hosted
+on the internet, particularly those with web pages but without formal
+application program interfaces (APIs).  These tools are based on the python
+requests module, which is used to make HTTP requests, and astropy, which
+provides most of the data parsing functionality.  Astroquery has received
+significant contributions from the broader astronomical community, including
+several significant contributions from telescope archives.
+\end{abstract}
 
 \section{Introduction}
 Sharing data is a critical component of astronomical research.  Astronomy
@@ -11,9 +22,9 @@ understanding of the universe.
 
 Data sharing has taken on a variety of forms.  The most prominent are the major
 observatory archives: MAST, NOAO, ESO, IPAC, CADC, CDS (hosting Vizier and
-SIMBAD), NRAO, CXC, HEASARC, ESA are the main
+SIMBAD), NRAO, CXC, HEASARC, and ESA are the main
 organizations hosting raw and processed data from ground and space based
-telescopes.  These data archive also serve as the primary means for serving data
+telescopes.  These data archives also serve as the primary means for serving data
 to users when the data are taken in queue mode, i.e., when the data are taken
 while the observer is not on-site.
 
@@ -22,15 +33,18 @@ their full data sets.  In some cases, these data sets are shared via the
 observatory that acquired them - for example, the all-sky data acquired with
 Planck, WMAP, and COBE delivered a variety of data products as part of the
 mission.  Other surveys, particularly ground-based surveys, serve their own
-data.  Examples include SDSS, UKIDSS, ...
+data.  Examples include SDSS, UKIDSS, and likely many more in the near future.
 
 Individual teams and small groups will often share their data.
 These services do not follow any particular standard and can be widely
-varied in the type and amount of data shared.
+varied in the type and amount of data shared.  Sometimes these data
+are shared via the archive systems (e.g., IRSA at IPAC hosts many
+individual survey data sets), while others use their own web hosting
+systems (e.g., MAGPIS).
 
 Finally, there are other data types relevant to astronomy that are not
 served by the typical astronomical databases.  Examples include molecular
-and atomic properties.
+and atomic properties, such as those provided by Splatalogue and NIST.
 
 Astroquery arose from a desire to access these databases from the command line
 in a scriptable fashion.  Script-based data access provides astronomers with
@@ -38,13 +52,19 @@ the ability to make reproducible analysis scripts in which the data are
 acquired and processed into scientifically relevant results with minimal
 overhead.
 
-The Virtual Observatory has some overlap with astroquery, but it does not
-provide the simple tools many astronomers find necessary in day-to-day work.
-Additionally, many of the services noted above do not support VO standards or
-protocols and are therefore inaccessible to the VO.
+In this paper, we provide an overview of the astroquery package.
+Section \ref{sec:software} describes the basic layout of the software and
+the shared API concept underlying all modules.  Section \ref{sec:development}
+describes the development model.
+
+% The Virtual Observatory has some overlap with astroquery, but it does not
+% provide the simple tools many astronomers find necessary in day-to-day work.
+% Additionally, many of the services noted above do not support VO standards or
+% protocols and are therefore inaccessible to the VO.
 
 
 \section{The Software}
+\label{sec:software}
 Astroquery consists of a collection of modules that mostly share a similar interface,
 but are meant to be used independently.  They are primarily based on a common framework
 that uses the python \texttt{requests} package to perform HTTP requests to communicate
@@ -70,12 +90,47 @@ In this example, \texttt{Simbad} is an instance of the
 The returned result, stored in the variable \texttt{result\_table},
 is an astropy table.
 
+While there is a common suggested API described in the \texttt{template} module,
+individual packages are not \emph{required} to support this API because, for
+some, it is not possible.  For example, the atomic and molecular databases refer
+to physical data that is not related to positions on the sky and therefore
+their astroquery modules cannot include \texttt{query\_region} methods.
+
+\subsection{Testing}
+Astroquery testing is somewhat different from most other packages in the python
+ecosystem.  While the tests are based on the astropy package-template and use
+pytest to run and check the outputs, the astroquery tests are split into
+\emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
+would enter at the command line, but they are dependent on the stability of the
+remote services.  Historically, we have found that it is quite rare for all of
+the astroquery-supported services to be accessible simultaneously.
+
+We therefore require that each module provide some tests that do not rely on
+having an internet connection.  These tests rely on \emph{monkeypatching} to
+replace the remote requests, instead using locally available files to test the
+query mechanisms and the data parsers.  Monkeypatching in the context of
+\texttt{pytest} results in code that is generally more difficult to understand
+than typical python code, but a set of tests independent of the remote services
+is necessary.
+
+The non-remote tests are run as part of the continuous integration for the
+project with each commit.  The remote tests are run as part of a
+regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
+also helps reduce the burden on the remote services.
+
 \section{The development model}
+\label{sec:development}
 Astroquery has received contributions from 53 people as of June 2017.
 While the primary maintenance burden is shouldered by 2-3 people at any given time,
 most individual modules have been implemented independently by interested volunteers.
-Additionally, astroquery has received support from the Google Summer of Code
-program, with three students (coauthors Madhura Parikh, Simon Liedtke, and Ayush Yadav)
+
+Some contributions have come as direct institutional support.  The ESA GAIA and
+ESASky modules were provided by developers working for ESA.  The MAST query
+tool was developed by a developer at STSCI. 
+
+Astroquery has received support from the Google Summer of Code
+program, with two students (coauthors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
 
-
+Anyone can contribute to astroquery.  The maintainers are committed to helping
+developers make new modules that meet the requirements of astroquery.
