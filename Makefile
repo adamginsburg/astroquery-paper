@@ -5,6 +5,7 @@ endif
 PDFLATEX=${texpath}pdflatex -halt-on-error -synctex=1 --interaction=nonstopmode
 SKIPERR=${texpath}pdflatex --interaction=nonstopmode
 LATEX=${PDFLATEX}
+PDFLATEX=/bin/bash/pdflatex -halt-on-error -synctex=1 --interaction=nonstopmode
 BIBTEX=bibtex
 DVIPS=dvips
 PS2PDF=ps2pdf
