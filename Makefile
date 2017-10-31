@@ -8,6 +8,7 @@ LATEX=${PDFLATEX}
 BIBTEX=bibtex
 DVIPS=dvips
 PS2PDF=ps2pdf
+SHELL=/bin/bash
 
 all: main.tex
 
