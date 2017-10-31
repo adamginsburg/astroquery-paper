@@ -14,8 +14,8 @@ all: main.tex
 .PHONY: main.tex
 main.tex: 
 	echo "texpath: ${texpath}"
-	#${PDFLATEX} main.tex
-	python local_build.py --no-bibtex
-	cp authorea_build/authorea_paper.pdf main.pdf
+	${PDFLATEX} main.tex
+	#python local_build.py --no-bibtex
+	#cp authorea_build/authorea_paper.pdf main.pdf
 	gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=main_compressed.pdf main.pdf
 
