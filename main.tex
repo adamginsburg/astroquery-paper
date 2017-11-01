@@ -8,7 +8,7 @@
 \begin{abstract}
 Astroquery is a collection of tools for requesting data from databases hosted
 on the internet, particularly those with web pages but without formal
-application program interfaces (APIs).  These tools are based on the python
+application program interfaces (APIs).  These tools are based on the Python
 requests module, which is used to make HTTP requests, and astropy, which
 provides most of the data parsing functionality.  Astroquery has received
 significant contributions from the broader astronomical community, including
@@ -72,7 +72,7 @@ describes the development model.
 \label{sec:software}
 Astroquery consists of a collection of modules that mostly share a similar interface,
 but are meant to be used independently.  They are primarily based on a common framework
-that uses the python \texttt{requests} package to perform HTTP requests to communicate
+that uses the Python \texttt{requests} package to perform HTTP requests to communicate
 with web services.
 
 For new development, there is a \texttt{template}  that lays out the basic
@@ -132,7 +132,7 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 \texttt{\_async} functions into their corresponding non-asynchronous versions.
 
 \subsection{Testing}
-Astroquery testing is somewhat different from most other packages in the python
+Astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the astropy package-template and use
 pytest to run and check the outputs, the astroquery tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
@@ -145,7 +145,7 @@ having an internet connection.  These tests rely on \emph{monkeypatching} to
 replace the remote requests, instead using locally available files to test the
 query mechanisms and the data parsers.  Monkeypatching in the context of
 \texttt{pytest} results in code that is generally more difficult to understand
-than typical python code, but a set of tests independent of the remote services
+than typical Python code, but a set of tests independent of the remote services
 is necessary.
 
 The non-remote tests are run as part of the continuous integration for the
