@@ -8,7 +8,7 @@
 \begin{abstract}
 Astroquery is a collection of tools for requesting data from databases hosted
 on the internet, particularly those with web pages but without formal
-application program interfaces (APIs).  These tools are based on the python
+application program interfaces (APIs).  These tools are based on the Python
 requests module, which is used to make HTTP requests, and astropy, which
 provides most of the data parsing functionality.  Astroquery has received
 significant contributions from the broader astronomical community, including
@@ -57,7 +57,7 @@ the ability to make reproducible analysis scripts in which the data are
 acquired and processed into scientifically relevant results with minimal
 overhead.
 
-In this paper, we provide an overview of the astroquery package.
+In this paper, we provide an overview of the \texttt{astroquery} package.
 Section \ref{sec:software} describes the basic layout of the software and
 the shared API concept underlying all modules.  Section \ref{sec:development}
 describes the development model.
@@ -72,7 +72,7 @@ describes the development model.
 \label{sec:software}
 Astroquery consists of a collection of modules that mostly share a similar interface,
 but are meant to be used independently.  They are primarily based on a common framework
-that uses the python \texttt{requests} package to perform HTTP requests to communicate
+that uses the Python \texttt{requests} package to perform HTTP requests to communicate
 with web services.
 
 For new development, there is a \texttt{template}  that lays out the basic
@@ -99,10 +99,10 @@ While there is a common suggested API described in the \texttt{template} module,
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
-their astroquery modules cannot include \texttt{query\_region} methods.
+their Astroquery modules cannot include \texttt{query\_region} methods.
 
 \subsection{The API}
-The common API has a few featuers definted in the \texttt{template} module.
+The common API has a few features defined in the \texttt{template} module.
 Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
@@ -115,7 +115,7 @@ applicable:
         object.  This method relies on the service to resolve the object name.
         The returned object is an astropy \texttt{Table}.
     \item \texttt{get\_images} - For services that provide image data, this
-        function accepts a \texttt{SkyCoord} and a radius to search for data
+        function accepts an astropy \texttt{SkyCoord} and a radius to search for data
         that cover the specified target. The returned object should be a list
         of \texttt{astropy.io.fits.HDUList} objects.
 \end{itemize}
@@ -132,20 +132,20 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 \texttt{\_async} functions into their corresponding non-asynchronous versions.
 
 \subsection{Testing}
-Astroquery testing is somewhat different from most other packages in the python
+Astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the astropy package-template and use
-pytest to run and check the outputs, the astroquery tests are split into
+pytest to run and check the outputs, the \texttt{astroquery} tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
 remote services.  Historically, we have found that it is quite rare for all of
-the astroquery-supported services to be accessible simultaneously.
+the Astroquery-supported services to be accessible simultaneously.
 
 We therefore require that each module provide some tests that do not rely on
 having an internet connection.  These tests rely on \emph{monkeypatching} to
 replace the remote requests, instead using locally available files to test the
 query mechanisms and the data parsers.  Monkeypatching in the context of
 \texttt{pytest} results in code that is generally more difficult to understand
-than typical python code, but a set of tests independent of the remote services
+than typical Python code, but a set of tests independent of the remote services
 is necessary.
 
 The non-remote tests are run as part of the continuous integration for the
@@ -154,12 +154,12 @@ regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
 also helps reduce the burden on the remote services.
 
 \subsection{Other utilities}
-There are several general-use utilities implemented as part of astroquery, such
+There are several general-use utilities implemented as part of Astroquery, such
 as a bulk FITS file downloader and renamer and a download progressbar.  There
 is also a schema system implemented to allow user-side parameter validation.
 So far, at the time of writing, this tool is only implemented in the ESO and
 Vizier modules, but it could be expanded to other modules to reduce the number
-of doomed-to-fail queries sent through astroquery.
+of doomed-to-fail queries sent through Astroquery.
 
 \section{The development model}
 \label{sec:development}
@@ -168,18 +168,19 @@ While the primary maintenance burden is shouldered by 2-3 people at any given ti
 most individual modules have been implemented independently by interested volunteers.
 
 Some contributions have come as direct institutional support.  The ESA GAIA and
-ESASky modules were provided by developers working for ESA.  The MAST query
-tool was developed by a developer at STSCI. 
+ESASky modules were provided by developers working for ESA.  Meanwhile,
+the MAST and VO Cone Search query tools were added by developers at STSCI,
+with the latter moved over from \texttt{astropy.vo}.
 
 Astroquery has received support from the Google Summer of Code
-program, with two students (coauthors Madhura Parikh and Simon Liedtke)
+program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
 
-Anyone can contribute to astroquery.  The maintainers are committed to helping
-developers make new modules that meet the requirements of astroquery.
+Anyone can contribute to Astroquery.  The maintainers are committed to helping
+developers make new modules that meet the requirements of Astroquery.
 
 \section{Documentation and References}
-Several authors have independently described how to use various astroquery
+Several authors have independently described how to use various \texttt{astroquery}
 modules, which is a helpful practice we encourage.
 
 \url{https://www.cosmosim.org/cms/news/cosmosim-package-for-astroquery/}
