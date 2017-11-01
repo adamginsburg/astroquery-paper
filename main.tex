@@ -57,7 +57,7 @@ the ability to make reproducible analysis scripts in which the data are
 acquired and processed into scientifically relevant results with minimal
 overhead.
 
-In this paper, we provide an overview of the astroquery package.
+In this paper, we provide an overview of the \texttt{astroquery} package.
 Section \ref{sec:software} describes the basic layout of the software and
 the shared API concept underlying all modules.  Section \ref{sec:development}
 describes the development model.
@@ -99,7 +99,7 @@ While there is a common suggested API described in the \texttt{template} module,
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
-their astroquery modules cannot include \texttt{query\_region} methods.
+their Astroquery modules cannot include \texttt{query\_region} methods.
 
 \subsection{The API}
 The common API has a few features defined in the \texttt{template} module.
@@ -134,11 +134,11 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 \subsection{Testing}
 Astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the astropy package-template and use
-pytest to run and check the outputs, the astroquery tests are split into
+pytest to run and check the outputs, the \texttt{astroquery} tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
 remote services.  Historically, we have found that it is quite rare for all of
-the astroquery-supported services to be accessible simultaneously.
+the Astroquery-supported services to be accessible simultaneously.
 
 We therefore require that each module provide some tests that do not rely on
 having an internet connection.  These tests rely on \emph{monkeypatching} to
@@ -154,12 +154,12 @@ regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
 also helps reduce the burden on the remote services.
 
 \subsection{Other utilities}
-There are several general-use utilities implemented as part of astroquery, such
+There are several general-use utilities implemented as part of Astroquery, such
 as a bulk FITS file downloader and renamer and a download progressbar.  There
 is also a schema system implemented to allow user-side parameter validation.
 So far, at the time of writing, this tool is only implemented in the ESO and
 Vizier modules, but it could be expanded to other modules to reduce the number
-of doomed-to-fail queries sent through astroquery.
+of doomed-to-fail queries sent through Astroquery.
 
 \section{The development model}
 \label{sec:development}
@@ -176,11 +176,11 @@ Astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
 
-Anyone can contribute to astroquery.  The maintainers are committed to helping
-developers make new modules that meet the requirements of astroquery.
+Anyone can contribute to Astroquery.  The maintainers are committed to helping
+developers make new modules that meet the requirements of Astroquery.
 
 \section{Documentation and References}
-Several authors have independently described how to use various astroquery
+Several authors have independently described how to use various \texttt{astroquery}
 modules, which is a helpful practice we encourage.
 
 \url{https://www.cosmosim.org/cms/news/cosmosim-package-for-astroquery/}
