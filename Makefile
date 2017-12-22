@@ -3,7 +3,7 @@ ifndef texpath
 texpath=/usr/texbin/
 endif
 PDFLATEX=pdflatex -halt-on-error -synctex=1 --interaction=nonstopmode
-#PDFLATEX=/usr/bin/pdflatex -halt-on-error -synctex=1 --interaction=nonstopmode
+PDFLATEX=${texpath}/pdflatex -halt-on-error -synctex=1 --interaction=nonstopmode
 BIBTEX=bibtex
 DVIPS=dvips
 PS2PDF=ps2pdf
