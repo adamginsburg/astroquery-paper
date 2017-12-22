@@ -73,10 +73,10 @@ describes the development model.
 
 \section{The Software}
 \label{sec:software}
-Astroquery consists of a collection of modules that mostly share a similar interface,
-but are meant to be used independently.  They are primarily based on a common framework
-that uses the Python \texttt{requests} package to perform HTTP requests to communicate
-with web services.
+Astroquery consists of a collection of modules that mostly share a similar
+interface, but are meant to be used independently.  They are primarily based on
+a common framework that uses the Python \texttt{requests} package to perform
+HTTP requests to communicate with web services.
 
 For new development, there is a \texttt{template}  that lays out the basic
 framework of any new module.  All modules are based on having a single core
@@ -166,6 +166,11 @@ of doomed-to-fail queries sent through Astroquery.
 
 \section{The development model}
 \label{sec:development}
+Astroquery is an \texttt{astropy} affiliated package and is a core part of the
+\texttt{astropy} ecosystem \citep{Astropy-Collaboration2013a}.  It is a
+standalone project and will always remain independent of the \texttt{astropy}
+core package.
+
 Astroquery has received contributions from 53 people as of June 2017.
 While the primary maintenance burden is shouldered by 2-3 people at any given time,
 most individual modules have been implemented independently by interested volunteers.
@@ -190,4 +195,9 @@ modules, which is a helpful practice we encourage.
     \item \url{https://www.cosmosim.org/cms/news/cosmosim-package-for-astroquery/}
     \item \url{https://arxiv.org/abs/1408.7026}
 \end{itemize}
+
+
+\bibliographystyle{aasjournal}
+\bibliography{bibliography}
+
 \end{document}

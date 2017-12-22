@@ -12,6 +12,7 @@ before_install:
      texlive-latex-recommended
      texlive-xetex
      texlive-publishers
+- export texpath=/usr/bin
      #- yes "" | sudo add-apt-repository ppa:jonathonf/texlive-2017
      #- sudo apt-get update -y
      #- sudo apt-get install -y
