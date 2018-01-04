@@ -5,6 +5,30 @@
 \usepackage{listings}
 \usepackage{inconsolata} % standard "prettier" astropy latex font
 
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\renewcommand{\lstlistingname}{Example}
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+}
+
 \begin{document}
 \input{authors}
 
@@ -91,11 +115,9 @@ symmetric region projected on the sky.
 
 An example using the SIMBAD interface is shown below (see
 \url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}):
-\begin{lstlisting}
-
-    from astroquery.simbad import Simbad
-    result_table = Simbad.query_region("m81")
-
+\begin{lstlisting}[caption=Query SIMBAD for a region around M81]
+from astroquery.simbad import Simbad
+result_table = Simbad.query_region("m81")
 \end{lstlisting}
 In this example, \texttt{Simbad} is an instance of the
 \texttt{astroquery.simbad.SimbadClass} class.
