@@ -106,6 +106,16 @@ some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
 their Astroquery modules cannot include \texttt{query\_region} methods.
 
+\subsubsection{HTTP User-Agent}
+Astroquery identifies itself to host services using the \texttt{HTTP
+User-Agent} header data.  The format of the User-Agent string is
+\texttt{astroquery/\{version\} \{requests\_version\}}, where
+\texttt{\{version\}} is a version number of the form \#.\#.\# and
+\texttt{\{requests\_version\}} is the corresponding version of the python
+requests module.  This information can be used by data-hosting services
+to determine how many users are accessing their service via astroquery
+and to assist in debugging if improper queries are being posted.
+
 \subsection{The API}
 The common API has a few features defined in the \texttt{template} module.
 Each service is expected to provide the following interfaces, assuming they are
