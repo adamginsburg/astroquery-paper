@@ -7,6 +7,8 @@
 
 \usepackage{listings}
 
+\newcommand{\astroquery}{\texttt{astroquery}}
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -89,7 +91,7 @@ the ability to make reproducible analysis scripts in which the data are
 acquired and processed into scientifically relevant results with minimal
 overhead.
 
-In this paper, we provide an overview of the \texttt{astroquery} package.
+In this paper, we provide an overview of the \astroquery package.
 Section \ref{sec:software} describes the basic layout of the software and
 the shared API concept underlying all modules.  Section \ref{sec:development}
 describes the development model.
@@ -179,7 +181,7 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 \subsection{Testing}
 Astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the astropy package-template and use
-pytest to run and check the outputs, the \texttt{astroquery} tests are split into
+pytest to run and check the outputs, the \astroquery tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
 remote services.  Historically, we have found that it is quite rare for all of
@@ -245,16 +247,21 @@ issue tracker when significant API modifications are made.
 
 \subsection{Relation to the VO}
 
-The Virtual Observatory (VO) has some goals similar to \texttt{astroquery},
+The Virtual Observatory (VO) has some goals similar to \astroquery,
 though their approach and philosophy is different.  Where VO services provide a
-single point of access for all VO-compatible services, \texttt{astroquery}
+single point of access for all VO-compatible services, \astroquery
 provides a collection of access points that do not require a specific API from
-the hosting service.  The general philosophy in \texttt{astroquery} is to
+the hosting service.  The general philosophy in \astroquery is to
 replicate the web page interface provided by a given service as closely as
 possible.  While this approach makes some versions of cross-archive searches
-more difficult, it keeps the barrier to entry for new users fairly low.
+more difficult, it keeps the barrier to entry for new users fairly low and limits
+the maintenance burden for developers.
+
 However, there are developments in progress to allow more VO-like queries
-within astroquery.
+within astroquery, such as searching for databases by keywords.  As more
+services implement VO-based access, some query modules may adopt VO as a backend,
+but these changes should be transparent to users (i.e., the \astroquery
+interfaces will remain unchanged).
 
 \section{Documentation and References}
 \subsection{Online documentation}
@@ -265,7 +272,7 @@ but interested users will find many more on the documentation page and
 in the example gallery (\url{https://astroquery.readthedocs.io/en/latest/gallery.html}).
 
 \subsection{Other Documents}
-Several authors have independently described how to use various \texttt{astroquery}
+Several authors have independently described how to use various \astroquery
 modules, which is a helpful practice we encourage.
 
 \begin{itemize}
