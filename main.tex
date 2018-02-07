@@ -89,15 +89,6 @@ the ability to make reproducible analysis scripts in which the data are
 acquired and processed into scientifically relevant results with minimal
 overhead.
 
-The Virtual Observatory (VO) has some goals similar to \texttt{astroquery},
-though their approach and philosophy is different.  Where VO services provide a
-single point of access for all VO-compatible services, \texttt{astroquery}
-provides a collection of access points that do not require a specific API from
-the hosting service.  The general philosophy in \texttt{astroquery} is to
-replicate the web page interface provided by a given service as closely as
-possible.  While this approach makes some versions of cross-archive searches
-more difficult, it keeps the barrier to entry for new users fairly low.
-
 In this paper, we provide an overview of the \texttt{astroquery} package.
 Section \ref{sec:software} describes the basic layout of the software and
 the shared API concept underlying all modules.  Section \ref{sec:development}
@@ -251,6 +242,19 @@ Some services have been helpful about alerting the astroquery development team
 in advance when API changes are imminent.  We are grateful for such advance
 warning and encourage other services to check in and file Issues on astroquery's
 issue tracker when significant API modifications are made.
+
+\subsection{Relation to the VO}
+
+The Virtual Observatory (VO) has some goals similar to \texttt{astroquery},
+though their approach and philosophy is different.  Where VO services provide a
+single point of access for all VO-compatible services, \texttt{astroquery}
+provides a collection of access points that do not require a specific API from
+the hosting service.  The general philosophy in \texttt{astroquery} is to
+replicate the web page interface provided by a given service as closely as
+possible.  While this approach makes some versions of cross-archive searches
+more difficult, it keeps the barrier to entry for new users fairly low.
+However, there are developments in progress to allow more VO-like queries
+within astroquery.
 
 \section{Documentation and References}
 \subsection{Online documentation}
