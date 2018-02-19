@@ -241,6 +241,14 @@ ESASky modules were provided by developers working for ESA.  Meanwhile,
 the MAST and VO Cone Search query tools were added by developers at STSCI,
 with the latter moved over from \texttt{astropy.vo}.
 
+For VO Cone Search, it has \texttt{query\_*\_region} interface like the
+other \astroquery services, in addition to existing interfaces ported over
+from \astropypkg. As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists;
+Therefore, \astroquery is now the primary provider of this VO Cone Search
+service. From a typical user's standpoint, switching over from
+\texttt{astropy.vo}, there should be no difference except for updating their
+Python \texttt{import} statements.
+
 Astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
@@ -282,7 +290,7 @@ interfaces will remain unchanged).
 The astroquery modules are documented online and can be accessed through
 readthedocs at \url{https://astroquery.readthedocs.io/en/latest/}.
 We include one detailed example of how to use astroquery in Appendix \ref{sec:example},
-but interested users will find many more on the documentation page and 
+but interested users will find many more on the documentation page and
 in the example gallery (\url{https://astroquery.readthedocs.io/en/latest/gallery.html}).
 
 \subsection{Other Documents}
@@ -301,7 +309,7 @@ modules, which is a helpful practice we encourage.
 
 \section{Summary}
 Astroquery is a toolkit for accessing remotely hosted data through Python.
-It is part of the astropy affiliated package system.  
+It is part of the astropy affiliated package system.
 We have described its general layout and development model.
 We welcome any new contributions.
 
@@ -342,7 +350,7 @@ It can also be found on astropy's gallery page (\url{http://astroquery.readthedo
     ax = fig.add_axes([0.15, 0.1, 0.8, 0.8], projection=mywcs)
     ax.set_xlabel("RA")
     ax.set_ylabel("Dec")
-    
+
     ax.imshow(img[0].data, cmap='gray_r', interpolation='none', origin='lower',
               norm=pl.matplotlib.colors.LogNorm())
 
@@ -370,7 +378,7 @@ It can also be found on astropy's gallery page (\url{http://astroquery.readthedo
             mec='r', mfc='none')
     # zoom in on the relevant region
     ax.axis([100,200,100,200])
-    
+
 \end{lstlisting}
 
 \begin{figure*}[!htp]
