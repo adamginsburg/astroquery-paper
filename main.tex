@@ -10,6 +10,8 @@
 
 \newcommand{\package}[1]{\texttt{#1}\xspace}
 \newcommand{\astroquery}{\package{astroquery}}
+\newcommand{\astropy}{Astropy\xspace}
+\newcommand{\astropypkg}{\package{astropy}}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -36,14 +38,14 @@
 \begin{document}
 \input{authors}
 
-\title{Astroquery: An Astronomical Web-Querying Package in Python}
+\title{\astroquery: An Astronomical Web-Querying Package in Python}
 
 \begin{abstract}
-Astroquery is a collection of tools for requesting data from databases hosted
+\astroquery is a collection of tools for requesting data from databases hosted
 on the internet, particularly those with web pages but without formal
 application program interfaces (APIs).  These tools are based on the Python
 requests module, which is used to make HTTP requests, and astropy, which
-provides most of the data parsing functionality. Astroquery has received
+provides most of the data parsing functionality. \astroquery has received
 significant contributions from the broader astronomical community, including
 several significant contributions from telescope archives.
 \footnote{
@@ -99,7 +101,7 @@ Finally, there are other data types relevant to astronomy that are not
 served by the typical astronomical databases.  Examples include molecular
 and atomic properties, such as those provided by Splatalogue and NIST.
 
-Astroquery arose from a desire to access these databases from the command line
+\astroquery arose from a desire to access these databases from the command line
 in a scriptable fashion.  Script-based data access provides astronomers with
 the ability to make reproducible analysis scripts in which the data are
 acquired and processed into scientifically relevant results with minimal
@@ -118,7 +120,7 @@ describes the development model.
 
 \section{The Software}
 \label{sec:software}
-Astroquery consists of a collection of modules that mostly share a similar
+\astroquery consists of a collection of modules that mostly share a similar
 interface, but are meant to be used independently.  They are primarily based on
 a common framework that uses the Python \texttt{requests} package to perform
 HTTP requests to communicate with web services.
@@ -145,16 +147,16 @@ While there is a common suggested API described in the \texttt{template} module,
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
-their Astroquery modules cannot include \texttt{query\_region} methods.
+their \astroquery modules cannot include \texttt{query\_region} methods.
 
 \subsection{HTTP User-Agent}
-Astroquery identifies itself to host services using the \texttt{HTTP
+\astroquery identifies itself to host services using the \texttt{HTTP
 User-Agent} header data.  The format of the User-Agent string is
 \texttt{astroquery/\{version\} \{requests\_version\}}, where
 \texttt{\{version\}} is a version number of the form \#.\#.\# and
 \texttt{\{requests\_version\}} is the corresponding version of the Python
 requests module.  This information can be used by data hosting services
-to determine how many users are accessing their service via astroquery
+to determine how many users are accessing their service via \astroquery
 and to assist in debugging if improper queries are being posted.
 
 \subsection{The API}
@@ -193,13 +195,13 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 {\color{red}TODO: Julien, could you add something here?}
 
 \subsection{Testing}
-Astroquery testing is somewhat different from most other packages in the Python
+\astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the astropy package-template and use
 pytest to run and check the outputs, the \astroquery tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
 remote services.  Historically, we have found that it is quite rare for all of
-the Astroquery-supported services to be accessible simultaneously.
+the \texttt{astroquery}-supported services to be accessible simultaneously.
 
 We therefore require that each module provide some tests that do not rely on
 having an internet connection.  These tests rely on
@@ -218,21 +220,21 @@ regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
 also helps reduce the burden on the remote services.
 
 \subsection{Other utilities}
-There are several general-use utilities implemented as part of Astroquery, such
+There are several general-use utilities implemented as part of \astroquery, such
 as a bulk FITS file downloader and renamer and a download progressbar.  There
 is also a schema system implemented to allow user-side parameter validation.
 So far, at the time of writing, this tool is only implemented in the ESO and
 Vizier modules, but it could be expanded to other modules to reduce the number
-of doomed-to-fail queries sent through Astroquery.
+of doomed-to-fail queries sent through \astroquery.
 
 \section{The development model}
 \label{sec:development}
-Astroquery is an \texttt{astropy} affiliated package and is a core part of the
+\astroquery is an \texttt{astropy} affiliated package and is a core part of the
 \texttt{astropy} ecosystem \citep{Astropy-Collaboration2013a}.  It is a
 standalone project and will always remain independent of the \texttt{astropy}
 core package.
 
-Astroquery has received contributions from 53 people as of June 2017.
+\astroquery has received contributions from 53 people as of June 2017.
 While the primary maintenance burden is shouldered by 2-3 people at any given time,
 most individual modules have been implemented independently by interested volunteers.
 
@@ -241,22 +243,22 @@ ESASky modules were provided by developers working for ESA.  Meanwhile,
 the MAST and VO Cone Search query tools were added by developers at STSCI,
 with the latter moved over from \texttt{astropy.vo}.
 
-Astroquery has received support from the Google Summer of Code
+\astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
 
-Anyone can contribute to Astroquery.  The maintainers are committed to helping
-developers make new modules that meet the requirements of Astroquery.
+Anyone can contribute to \astroquery.  The maintainers are committed to helping
+developers make new modules that meet the requirements of \astroquery.
 
 \subsection{Versioning}
-Unlike the core astropy module, astroquery exists in an `always-unstable' state.
-Because astroquery relies on remote services' APIs to function, changes to those
-APIs may break astroquery without warning.  For that reason, we sometimes have
+Unlike the core astropy module, \astroquery exists in an `always-unstable' state.
+Because \astroquery relies on remote services' APIs to function, changes to those
+APIs may break \astroquery without warning.  For that reason, we sometimes have
 frequent or sudden version releases to accommodate remote changes.
 
-Some services have been helpful about alerting the astroquery development team
+Some services have been helpful about alerting the \astroquery development team
 in advance when API changes are imminent.  We are grateful for such advance
-warning and encourage other services to check in and file Issues on astroquery's
+warning and encourage other services to check in and file Issues on \astroquery's
 issue tracker when significant API modifications are made.
 
 \subsection{Relation to the VO}
@@ -272,17 +274,17 @@ more difficult, it keeps the barrier to entry for new users fairly low and limit
 the maintenance burden for developers.
 
 However, there are developments in progress to allow more VO-like queries
-within astroquery, such as searching for databases by keywords.  As more
+within \astroquery, such as searching for databases by keywords.  As more
 services implement VO-based access, some query modules may adopt VO as a backend,
 but these changes should be transparent to users (i.e., the \astroquery
 interfaces will remain unchanged).
 
 \section{Documentation and References}
 \subsection{Online documentation}
-The astroquery modules are documented online and can be accessed through
+The \astroquery modules are documented online and can be accessed through
 readthedocs at \url{https://astroquery.readthedocs.io/en/latest/}.
-We include one detailed example of how to use astroquery in Appendix \ref{sec:example},
-but interested users will find many more on the documentation page and 
+We include one detailed example of how to use \astroquery in Appendix \ref{sec:example},
+but interested users will find many more on the documentation page and
 in the example gallery (\url{https://astroquery.readthedocs.io/en/latest/gallery.html}).
 
 \subsection{Other Documents}
@@ -300,8 +302,8 @@ modules, which is a helpful practice we encourage.
 \end{itemize}
 
 \section{Summary}
-Astroquery is a toolkit for accessing remotely hosted data through Python.
-It is part of the astropy affiliated package system.  
+\astroquery is a toolkit for accessing remotely hosted data through Python.
+It is part of the astropy affiliated package system.
 We have described its general layout and development model.
 We welcome any new contributions.
 
@@ -312,7 +314,7 @@ We welcome any new contributions.
 \appendix
 \section{Example}
 \label{sec:example}
-In this appendix, we show an example of astroquery in action, highlighting the
+In this appendix, we show an example of \astroquery in action, highlighting the
 ability to use multiple modules and interact with astropy's table, coordinate,
 and unit tools.  This example approximately reproduces Figure 1 of
 \citet{Eisner2016a}, but with a different background.
@@ -342,7 +344,7 @@ It can also be found on astropy's gallery page (\url{http://astroquery.readthedo
     ax = fig.add_axes([0.15, 0.1, 0.8, 0.8], projection=mywcs)
     ax.set_xlabel("RA")
     ax.set_ylabel("Dec")
-    
+
     ax.imshow(img[0].data, cmap='gray_r', interpolation='none', origin='lower',
               norm=pl.matplotlib.colors.LogNorm())
 
@@ -370,12 +372,12 @@ It can also be found on astropy's gallery page (\url{http://astroquery.readthedo
             mec='r', mfc='none')
     # zoom in on the relevant region
     ax.axis([100,200,100,200])
-    
+
 \end{lstlisting}
 
 \begin{figure*}[!htp]
 \includegraphics[scale=1,width=7in]{example_figure_1.pdf}
-\caption{An example figure made using astroquery's \texttt{skyview} and
+\caption{An example figure made using \astroquery's \texttt{skyview} and
 \texttt{vizier} modules with astropy's \texttt{table}, \texttt{coordinates},
 \texttt{units}, and \texttt{wcs} modules.}
 \label{fig:example1}
