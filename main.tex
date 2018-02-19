@@ -44,7 +44,7 @@
 \astroquery is a collection of tools for requesting data from databases hosted
 on the internet, particularly those with web pages but without formal
 application program interfaces (APIs).  These tools are based on the Python
-requests module, which is used to make HTTP requests, and astropy, which
+requests module, which is used to make HTTP requests, and \astropy, which
 provides most of the data parsing functionality. \astroquery has received
 significant contributions from the broader astronomical community, including
 several significant contributions from telescope archives.
@@ -141,7 +141,7 @@ result_table = Simbad.query_region("m81")
 In this example, \texttt{Simbad} is an instance of the
 \texttt{astroquery.simbad.SimbadClass} class.
 The returned result, stored in the variable \texttt{result\_table},
-is an astropy table.
+is an \astropy table.
 
 While there is a common suggested API described in the \texttt{template} module,
 individual packages are not \emph{required} to support this API because, for
@@ -165,15 +165,15 @@ Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
 \begin{itemize}
-    \item \texttt{query\_region} - A function that accepts an astropy
+    \item \texttt{query\_region} - A function that accepts an \astropy
         \texttt{SkyCoord} object representing a point on the sky plus a
         specification of the radius around which to search.
-        The returned object is an astropy \texttt{Table}.
+        The returned object is an \astropy \texttt{Table}.
     \item \texttt{query\_object} - A function that accepts the name of an
         object.  This method relies on the service to resolve the object name.
-        The returned object is an astropy \texttt{Table}.
+        The returned object is an \astropy \texttt{Table}.
     \item \texttt{get\_images} - For services that provide image data, this
-        function accepts an astropy \texttt{SkyCoord} and a radius to search for data
+        function accepts an \astropy \texttt{SkyCoord} and a radius to search for data
         that cover the specified target. The returned object should be a list
         of \texttt{astropy.io.fits.HDUList} objects.
 \end{itemize}
@@ -196,7 +196,7 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 
 \subsection{Testing}
 \astroquery testing is somewhat different from most other packages in the Python
-ecosystem.  While the tests are based on the astropy package-template and use
+ecosystem.  While the tests are based on the \astropy package-template and use
 pytest to run and check the outputs, the \astroquery tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
@@ -229,9 +229,9 @@ of doomed-to-fail queries sent through \astroquery.
 
 \section{The development model}
 \label{sec:development}
-\astroquery is an \texttt{astropy} affiliated package and is a core part of the
-\texttt{astropy} ecosystem \citep{Astropy-Collaboration2013a}.  It is a
-standalone project and will always remain independent of the \texttt{astropy}
+\astroquery is an \astropy affiliated package and is a core part of the
+\astropy ecosystem \citep{Astropy-Collaboration2013a}.  It is a
+standalone project and will always remain independent of the \astropy
 core package.
 
 \astroquery has received contributions from 53 people as of June 2017.
@@ -251,7 +251,7 @@ Anyone can contribute to \astroquery.  The maintainers are committed to helping
 developers make new modules that meet the requirements of \astroquery.
 
 \subsection{Versioning}
-Unlike the core astropy module, \astroquery exists in an `always-unstable' state.
+Unlike the core \astropy module, \astroquery exists in an `always-unstable' state.
 Because \astroquery relies on remote services' APIs to function, changes to those
 APIs may break \astroquery without warning.  For that reason, we sometimes have
 frequent or sudden version releases to accommodate remote changes.
@@ -303,7 +303,7 @@ modules, which is a helpful practice we encourage.
 
 \section{Summary}
 \astroquery is a toolkit for accessing remotely hosted data through Python.
-It is part of the astropy affiliated package system.
+It is part of the \astropy affiliated package system.
 We have described its general layout and development model.
 We welcome any new contributions.
 
@@ -315,10 +315,10 @@ We welcome any new contributions.
 \section{Example}
 \label{sec:example}
 In this appendix, we show an example of \astroquery in action, highlighting the
-ability to use multiple modules and interact with astropy's table, coordinate,
+ability to use multiple modules and interact with \astropy's table, coordinate,
 and unit tools.  This example approximately reproduces Figure 1 of
 \citet{Eisner2016a}, but with a different background.
-It can also be found on astropy's gallery page (\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
+It can also be found on \astropy's gallery page (\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
 
 \begin{lstlisting}
 
@@ -378,7 +378,7 @@ It can also be found on astropy's gallery page (\url{http://astroquery.readthedo
 \begin{figure*}[!htp]
 \includegraphics[scale=1,width=7in]{example_figure_1.pdf}
 \caption{An example figure made using \astroquery's \texttt{skyview} and
-\texttt{vizier} modules with astropy's \texttt{table}, \texttt{coordinates},
+\texttt{vizier} modules with \astropy's \texttt{table}, \texttt{coordinates},
 \texttt{units}, and \texttt{wcs} modules.}
 \label{fig:example1}
 \end{figure*}
