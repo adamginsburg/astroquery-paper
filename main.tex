@@ -44,7 +44,7 @@
 \astroquery is a collection of tools for requesting data from databases hosted
 on the internet, particularly those with web pages but without formal
 application program interfaces (APIs).  These tools are based on the Python
-requests module, which is used to make HTTP requests, and \astropy, which
+\package{requests} package, which is used to make HTTP requests, and \astropy, which
 provides most of the data parsing functionality. \astroquery has received
 significant contributions from the broader astronomical community, including
 several significant contributions from telescope archives.
@@ -122,7 +122,7 @@ describes the development model.
 \label{sec:software}
 \astroquery consists of a collection of modules that mostly share a similar
 interface, but are meant to be used independently.  They are primarily based on
-a common framework that uses the Python \texttt{requests} package to perform
+a common framework that uses the Python \package{requests} package to perform
 HTTP requests to communicate with web services.
 
 For new development, there is a \texttt{template}  that lays out the basic
@@ -155,7 +155,7 @@ User-Agent} header data.  The format of the User-Agent string is
 \texttt{astroquery/\{version\} \{requests\_version\}}, where
 \texttt{\{version\}} is a version number of the form \#.\#.\# and
 \texttt{\{requests\_version\}} is the corresponding version of the Python
-requests module.  This information can be used by data hosting services
+\package{requests} package.  This information can be used by data hosting services
 to determine how many users are accessing their service via \astroquery
 and to assist in debugging if improper queries are being posted.
 
@@ -197,11 +197,11 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 \subsection{Testing}
 \astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the \astropy package-template and use
-pytest to run and check the outputs, the \astroquery tests are split into
+\package{pytest} to run and check the outputs, the \astroquery tests are split into
 \emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
 remote services.  Historically, we have found that it is quite rare for all of
-the \texttt{astroquery}-supported services to be accessible simultaneously.
+the \astroquery-supported services to be accessible simultaneously.
 
 We therefore require that each module provide some tests that do not rely on
 having an internet connection.  These tests rely on
@@ -210,7 +210,7 @@ attributes at runtime, i.e., changing what functions do after they are
 imported.} to
 replace the remote requests, instead using locally available files to test the
 query mechanisms and the data parsers.  Monkeypatching in the context of
-\texttt{pytest} results in code that is generally more difficult to understand
+\package{pytest} results in code that is generally more difficult to understand
 than typical Python code, but a set of tests independent of the remote services
 is necessary.
 
@@ -251,7 +251,7 @@ Anyone can contribute to \astroquery.  The maintainers are committed to helping
 developers make new modules that meet the requirements of \astroquery.
 
 \subsection{Versioning}
-Unlike the core \astropy module, \astroquery exists in an `always-unstable' state.
+Unlike the core \astropy package, \astroquery exists in an `always-unstable' state.
 Because \astroquery relies on remote services' APIs to function, changes to those
 APIs may break \astroquery without warning.  For that reason, we sometimes have
 frequent or sudden version releases to accommodate remote changes.
