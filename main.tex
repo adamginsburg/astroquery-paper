@@ -230,9 +230,13 @@ of doomed-to-fail queries sent through \astroquery.
 \section{The development model}
 \label{sec:development}
 \astroquery is an \astropypkg affiliated package and is a core part of the
-\astropypkg ecosystem \citep{Astropy-Collaboration2013a}.  It is a
-standalone project and will always remain independent of the \astropypkg
-core package.
+\astropypkg ecosystem \citep{Astropy-Collaboration2013a}.  It is a standalone
+project and will remain independent of the \astropypkg core
+package\footnote{Many \astropy affiliated packages are developed with the
+intent of eventually including them in the core of \astropypkg.  In contrast,
+\astroquery intends to remain a separate package indefinitely largely because
+of its need to rapidly adapt to changes in the remote services; \astropypkg
+cannot make such rapid changes because users rely on its stability.}.
 
 \astroquery has received contributions from 53 people as of June 2017.
 While the primary maintenance burden is shouldered by 2-3 people at any given time,
