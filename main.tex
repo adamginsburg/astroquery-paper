@@ -249,8 +249,8 @@ VO Cone Search has \texttt{query\_*\_region} interface like the other
 therefore, \astroquery is now the primary provider of this VO Cone Search
 service. From a typical user's standpoint, switching over from
 \texttt{astropy.vo} should result in no difference except for updating their
-Python \texttt{import} statements (e.g., \texttt{from astroquery import
-vo\_conesearch as vo} instead of \texttt{from astropy import vo}).
+Python \texttt{import} statements (e.g., \texttt{from astroquery.vo\_conesearch import
+conesearch} instead of \texttt{from astropy.vo.client import conesearch}).
 
 \astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
