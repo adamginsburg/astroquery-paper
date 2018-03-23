@@ -68,7 +68,7 @@ research the  data need to be available to everyone. Many scientific journals
 encourage or demand that the underlying data  accompany the article or be
 uploaded to a hosting service. Data sharing is not only important for new
 results, but also to provide the ability to test and verify published results.
-While many different efforts to promote data sharing data have made it more
+While many different efforts to promote data sharing have made it more
 common, it is difficult to keep track of how and where to retrieve a given data
 set. A common scripted interface to tie all these services together is a good
 way to make all the different data more accessible, and it provides authors
@@ -98,8 +98,8 @@ individual survey data sets), while others use their own web hosting
 systems (e.g., MAGPIS).
 
 Finally, there are other data types relevant to astronomy that are not
-served by the typical astronomical databases.  Examples include molecular
-and atomic properties, such as those provided by Splatalogue and NIST.
+served by the typical astronomical databases.  Examples include static databases, for instance of molecular
+and atomic properties, as those provided by Splatalogue and NIST, or services that are computationally intensive or require constant updates, like Solar System ephemerides.  
 
 \astroquery arose from a desire to access these databases from the command line
 in a scriptable fashion.  Script-based data access provides astronomers with
@@ -147,7 +147,7 @@ While there is a common suggested API described in the \texttt{template} module,
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
-their \astroquery modules cannot include \texttt{query\_region} methods.
+their \astroquery modules cannot include \texttt{query\_region} methods. The same applies to Solar System object ephemerides queries. Differences in the API are discussed in the \astroquery documentation (see Section \ref{sec:documentation}).
 
 \subsection{HTTP User-Agent}
 \astroquery identifies itself to host services using the \texttt{HTTP
@@ -190,6 +190,8 @@ data, so they may be useful for collecting metadata for very large files).  The
 data, but specifically for FITS files.  Developers need only implement
 these \texttt{\_async} functions because a wrapper tool exists to convert
 \texttt{\_async} functions into their corresponding non-asynchronous versions.
+
+Deviations from this standard API are documented in the \astroquery documentation (see Section \ref{sec:documentation}).
 
 \subsection{Layout of the base Query module and the QueryWithLogin module}
 {\color{red}TODO: Julien, could you add something here?}
@@ -258,6 +260,9 @@ service. From a typical user's standpoint, switching over from
 Python \texttt{import} statements (e.g., \texttt{from astroquery.vo\_conesearch import
 conesearch} instead of \texttt{from astropy.vo.client import conesearch}).
 
+\astroquery also receives contributions from funded programs. For instance, the JPLHorizons module has been implemented as part of the \texttt{sbpy} project with support from NASA PDART. Further Solar System-related services will be added to \astroquery in the near future through this support.  
+
+
 \astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
@@ -295,6 +300,7 @@ but these changes should be transparent to users (i.e., the \astroquery
 interfaces will remain unchanged).
 
 \section{Documentation and References}
+\label{sec:documentation}
 \subsection{Online documentation}
 The \astroquery modules are documented online and can be accessed through
 readthedocs at \url{https://astroquery.readthedocs.io/en/latest/}.
