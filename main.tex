@@ -44,10 +44,13 @@
 \astroquery is a collection of tools for requesting data from databases hosted
 on the internet, particularly those with web pages but without formal
 application program interfaces (APIs).  These tools are based on the Python
-\package{requests} package, which is used to make HTTP requests, and \astropypkg, which
-provides most of the data parsing functionality. \astroquery has received
-significant contributions from the broader astronomical community, including
-several significant contributions from telescope archives.
+\package{requests} package, which is used to make HTTP requests, and
+\astropypkg, which provides most of the data parsing functionality. \astroquery
+has received significant contributions from the broader astronomical community,
+including several significant contributions from telescope archives.
+\astroquery enables the creation of fully reproducible workflows from data
+acquisition through publication.  This document describes the philosophy, basic
+structure, and development model of the \astroquery package.
 \footnote{
 The repository associated with this paper is:
 https://github.com/adamginsburg/astroquery-paper
@@ -61,10 +64,12 @@ has historically been a leading field in data sharing, motivated at least
 in part by questions that cannot be answered with single instruments.
 In the past few decades, blind surveys have played a huge role in advancing our
 understanding of the universe, and these surveys have produced large reservoirs
-of data that astronomers regularly access.
+of data that astronomers regularly access.  However, tools for accessing these
+reservoirs are heterogeneous and often only available via graphical user
+interfaces (GUIs) such as web sites.
 
 One of the cornerstones of research is reproducibility. To be able to reproduce
-research the  data need to be available to everyone. Many scientific journals
+research, the data need to be available to everyone. Many scientific journals
 encourage or demand that the underlying data  accompany the article or be
 uploaded to a hosting service. Data sharing is not only important for new
 results, but also to provide the ability to test and verify published results.
@@ -85,10 +90,10 @@ while the observer is not on-site.
 
 In addition to observatories and telescopes, individual surveys often share
 their full data sets.  In some cases, these data sets are shared via the
-observatory that acquired them - for example, the all-sky data acquired with
-Planck, WMAP, and COBE delivered a variety of data products as part of the
-mission.  Other surveys, particularly ground-based surveys, serve their own
-data.  Examples include SDSS, 2MASS, UKIDSS, and likely many more in the near future.
+observatory that acquired them, for example, the all-sky data acquired with
+Planck, WMAP, and COBE.  Other surveys, particularly ground-based surveys,
+serve their own data.  Examples include SDSS, 2MASS, UKIDSS, and likely many
+more in the near future.
 
 Individual teams and small groups will often share their data.
 These services do not follow any particular standard and can be widely
@@ -98,8 +103,10 @@ individual survey data sets), while others use their own web hosting
 systems (e.g., MAGPIS).
 
 Finally, there are other data types relevant to astronomy that are not
-served by the typical astronomical databases.  Examples include static databases, for instance of molecular
-and atomic properties, as those provided by Splatalogue and NIST, or services that are computationally intensive or require constant updates, like Solar System ephemerides.  
+served by the typical astronomical databases.  Examples include databases of
+molecular and atomic properties, such as those provided by Splatalogue and
+NIST, or services that are computationally intensive or require constant
+updates, like Solar System ephemerides.  
 
 \astroquery arose from a desire to access these databases from the command line
 in a scriptable fashion.  Script-based data access provides astronomers with
@@ -126,8 +133,8 @@ a common framework that uses the Python \package{requests} package to perform
 HTTP requests to communicate with web services.
 
 For new development, there is a \texttt{template}  that lays out the basic
-framework of any new module.  All modules are based on having a single core
-\texttt{class} that will have some number of \texttt{query\_*} methods.
+framework of any new module.  All modules have a single core
+\texttt{class} that has some number of associated \texttt{query\_*} methods.
 The most common query methods are \texttt{query\_region}, which usually provide
 a ``cone search'' functionality, i.e., they search for data within a circularly
 symmetric region projected on the sky.
@@ -149,6 +156,13 @@ some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
 their \astroquery modules cannot include \texttt{query\_region} methods. The same applies to Solar System object ephemerides queries. Differences in the API are discussed in the \astroquery documentation (see Section \ref{sec:documentation}).
 
+\subsection{Version Numbers}
+\astroquery uses the same format as traditional semantic versioning,
+with versions indicated in the format MAJOR.MINOR.PATCH.  However,
+\astroquery patches are frequently made to accommodate upstream changes,
+i.e., changes made to the service being queried, and as such are not
+guaranteed to be backward-compatible.
+
 \subsection{HTTP User-Agent}
 \astroquery identifies itself to host services using the \texttt{HTTP
 User-Agent} header data.  The format of the User-Agent string is
@@ -158,6 +172,7 @@ User-Agent} header data.  The format of the User-Agent string is
 \package{requests} package.  This information can be used by data hosting services
 to determine how many users are accessing their service via \astroquery
 and to assist in debugging if improper queries are being posted.
+
 
 \subsection{The API}
 The common API has a few features defined in the \texttt{template} module.
