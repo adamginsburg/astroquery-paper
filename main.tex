@@ -157,21 +157,33 @@ to physical data that is not related to positions on the sky and therefore
 their \astroquery modules cannot include \texttt{query\_region} methods. The same applies to Solar System object ephemerides queries. Differences in the API are discussed in the \astroquery documentation (see Section \ref{sec:documentation}).
 
 \subsection{Version Numbers}
+\label{sec:versionnumbers}
 \astroquery uses the same format as traditional semantic versioning,
-with versions indicated in the format MAJOR.MINOR.PATCH.  However,
-\astroquery patches are frequently made to accommodate upstream changes,
-i.e., changes made to the service being queried, and as such are not
-guaranteed to be backward-compatible.
+with versions indicated in the format MAJOR.MINOR.PATCH.devCOMMIT\_ID (for
+example, 0.3.9.dev4581).  
+
+Starting in mid-2018, \astroquery switched from a manual release model
+to a continuous deployment model.  Prior to this change, the MAJOR.MINOR.PATCH
+versions were each created manually by one of the maintainers, then pushed
+to package release services.  After this change, each accepted pull request
+automatically triggered a new release via the python package index
+(\url{https://pypi.org/}). 
+
+\astroquery patches are frequently made to accommodate upstream changes, i.e.,
+changes made to the remote service, and as such are not guaranteed to be
+backward-compatible.
 
 \subsection{HTTP User-Agent}
+\label{sec:useragent}
 \astroquery identifies itself to host services using the \texttt{HTTP
 User-Agent} header data.  The format of the User-Agent string is
 \texttt{astroquery/\{version\} \{requests\_version\}}, where
-\texttt{\{version\}} is a version number of the form \#.\#.\# and
-\texttt{\{requests\_version\}} is the corresponding version of the Python
+\texttt{\{version\}} is a version number of the form described in \S
+\ref{sec:versionnumbers} and \texttt{\{requests\_version\}} is the
+corresponding version of the Python
 \package{requests} package.  This information can be used by data hosting services
 to determine how many users are accessing their service via \astroquery
-and to assist in debugging if improper queries are being posted.
+and to assist in debugging if improper queries are being submitted.
 
 
 \subsection{The API}
@@ -206,10 +218,16 @@ data, but specifically for FITS files.  Developers need only implement
 these \texttt{\_async} functions because a wrapper tool exists to convert
 \texttt{\_async} functions into their corresponding non-asynchronous versions.
 
-Deviations from this standard API are documented in the \astroquery documentation (see Section \ref{sec:documentation}).
+Deviations from this standard API are documented in the \astroquery
+documentation (see Section \ref{sec:documentation}).
 
 \subsection{Layout of the base Query module and the QueryWithLogin module}
-{\color{red}TODO: Julien, could you add something here?}
+For new module development, there are tools provide to handle various aspects
+of querying that are common across all modules.  The \texttt{BaseQuery}
+metaclass provides tools for caching requests and downloaded data, reducing the
+network load for repeated queries.  It is responsible for setting the
+User-Agent (\S \ref{sec:useragent}).  Finally, it provides a framework for
+logging in to services that require user authentication.
 
 \subsection{Testing}
 \astroquery testing is somewhat different from most other packages in the Python
