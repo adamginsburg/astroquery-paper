@@ -268,16 +268,21 @@ of doomed-to-fail queries sent through \astroquery.
 
 \section{Development history and status}
 \label{sec:development}
-\astroquery is an \astropy coordinated package
-\citep{APE15} and is a critical component of the
-\astropy Project ecosystem \citep{Astropy-Collaboration2013a}.  It is a standalone
-project and will remain independent of the \astropypkg core
+Anyone can contribute to \astroquery.  The maintainers are committed to helping
+developers make new modules that meet the requirements of \astroquery.  This
+section describes how \astroquery has been developed, but we welcome all sorts
+of new contributions, including new modules, upgrades to existing modules, and
+minor corrections to existing tools.
+
+\astroquery is an \astropy coordinated package \citep{APE15} and is a critical
+component of the \astropy Project ecosystem \citep{Astropy-Collaboration2013a}.
+It is a standalone project and will remain independent of the \astropypkg core
 package\footnote{Many \astropy affiliated packages are developed with the
 intent of eventually including them in the core of \astropypkg.  In contrast,
 \astroquery intends to remain a separate package indefinitely largely because
 of its need to rapidly adapt to changes in the remote services; \astropypkg
-cannot make such rapid changes because users rely on its stability.}, but
-is coordinated by the \astropy Project to ensure sustainability and maintenance.
+cannot make such rapid changes because users rely on its stability.}, but is
+coordinated by the \astropy Project to ensure sustainability and maintenance.
 
 \astroquery has received contributions from 60 people as of February 2018
 {\color{red}[TODO:UPDATE FOR SUBMISSION]}.  While the primary maintenance
@@ -292,16 +297,14 @@ latter moved over from \texttt{astropy.vo} (see Section \ref{sec:vo}).
 
 \astroquery also receives contributions from funded programs. For instance, the
 JPLHorizons module has been implemented as part of the \texttt{sbpy} project
-with support from NASA PDART. Further Solar System-related services will be
-added to \astroquery in the near future through this support.  
+with support from NASA PDART. Further Solar System-related services are planned
+to be added to \astroquery through this support.  
 
 
 \astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013-2017.
 
-Anyone can contribute to \astroquery.  The maintainers are committed to helping
-developers make new modules that meet the requirements of \astroquery.
 
 \subsection{Versioning}
 Unlike the core \astropypkg package, \astroquery exists in an `always-unstable' state.
