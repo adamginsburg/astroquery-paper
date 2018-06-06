@@ -293,7 +293,10 @@ service. From a typical user's standpoint, switching over from
 Python \texttt{import} statements (e.g., \texttt{from astroquery.vo\_conesearch import
 conesearch} instead of \texttt{from astropy.vo.client import conesearch}).
 
-\astroquery also receives contributions from funded programs. For instance, the JPLHorizons module has been implemented as part of the \texttt{sbpy} project with support from NASA PDART. Further Solar System-related services will be added to \astroquery in the near future through this support.  
+\astroquery also receives contributions from funded programs. For instance, the
+JPLHorizons module has been implemented as part of the \texttt{sbpy} project
+with support from NASA PDART. Further Solar System-related services will be
+added to \astroquery in the near future through this support.  
 
 
 \astroquery has received support from the Google Summer of Code
@@ -330,7 +333,11 @@ However, there are developments in progress to allow more VO-like queries
 within \astroquery, such as searching for databases by keywords.  As more
 services implement VO-based access, some query modules may adopt VO as a backend,
 but these changes should be transparent to users (i.e., the \astroquery
-interfaces will remain unchanged).
+interfaces will remain unchanged).  The documentation may guide users on how
+to use the more sophisticated VO tools that underly these tools
+
+Some general VO tools are available in astroquery.  The \texttt{vo_conesearch}
+package, which originally resided in \astropy, is now part of \astroquery.  
 
 \section{Documentation and References}
 \label{sec:documentation}
