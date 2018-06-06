@@ -332,18 +332,19 @@ but these changes should be transparent to users (i.e., the \astroquery
 interfaces will remain unchanged).  The documentation may guide users on how
 to use the more sophisticated VO tools that underly these tools
 
-VO Cone Search has \texttt{query\_*\_region} interface like the other
-\astroquery services in addition to the existing interfaces ported over from
-\astropypkg. As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists;
-therefore, \astroquery is now the primary provider of this VO Cone Search
-service. From a typical user's standpoint, switching over from
-\texttt{astropy.vo} should result in no difference except for updating their
-Python \texttt{import} statements (e.g., \texttt{from astroquery.vo\_conesearch import
-conesearch} instead of \texttt{from astropy.vo.client import conesearch}).
-
 
 Some general VO tools are available in astroquery.  The \texttt{vo\_conesearch}
-package, which originally resided in \astropy, is now part of \astroquery.  
+package, which originally resided in \astropy, is now part of \astroquery.  VO
+Cone Search has \texttt{query\_*\_region} interface like the other \astroquery
+services in addition to the existing interfaces ported over from \astropypkg.
+As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists; therefore,
+\astroquery is now the primary provider of this VO Cone Search service. From a
+typical user's standpoint, switching over from \texttt{astropy.vo} should
+result in no difference except for updating their Python \texttt{import}
+statements (e.g., \texttt{from astroquery.vo\_conesearch import conesearch}
+instead of \texttt{from astropy.vo.client import conesearch}).
+
+
 
 \section{Documentation and References}
 \label{sec:documentation}
