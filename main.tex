@@ -40,11 +40,12 @@
 
 \begin{abstract}
 \astroquery is a collection of tools for requesting data from databases hosted
-on the internet, including those with web pages but without formal
-application program interfaces (APIs).  These tools are based on the Python
+on remote servers with interfaces exposed on the internet, including those with
+web pages but without formal application program interfaces (APIs).  These
+tools are based on the Python
 \package{requests} package, which is used to make HTTP requests, and
 \astropypkg, which provides most of the data parsing functionality. \astroquery
-has received significant contributions from the broader astronomical community,
+has received significant contributions from throughout the astronomical community,
 including several significant contributions from telescope archives.
 \astroquery enables the creation of fully reproducible workflows from data
 acquisition through publication.  This document describes the philosophy, basic
@@ -394,8 +395,12 @@ We welcome any new contributions.
 In this appendix, we show an example of \astroquery in action, highlighting the
 ability to use multiple modules and interact with \astropypkg's table, coordinate,
 and unit tools.  This example approximately reproduces Figure 1 of
-\citet{Eisner2016a}, but with a different background.
-It can also be found on \astropypkg's gallery page (\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
+\citet{Eisner2016a}, but with a different background.  It can also be found on
+\astropypkg's gallery page
+(\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
+Another illustration of how to use astroquery tools in a finder chart making 
+tool is \texttt{fcmaker}, which produces charts for ESO observations using
+\astroquery \citep{Vogt2018a}.
 
 
 \newpage
