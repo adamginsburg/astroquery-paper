@@ -178,6 +178,19 @@ automatically triggered a new release via the python package index
 changes made to the remote service, and as such are not guaranteed to be
 backward-compatible.
 
+%\subsection{Versioning}
+%Unlike the core \astropypkg package, \astroquery exists in an `always-unstable' state.
+%Because \astroquery relies on remote services' APIs to function, changes to those
+%APIs may break \astroquery without warning.  We have
+%frequent releases to accommodate remote changes.  Starting in 2018, \astroquery
+%moved to a `continuous release' model, in which every change merged into the
+%master branch is deployed as a release on the python package index (pypi).
+%
+%Some services have been helpful about alerting the \astroquery development team
+%in advance when API changes are imminent.  We are grateful for such advance
+%warning and encourage other services to check in and file issues on \astroquery's
+%issue tracker when significant API modifications are made.
+
 \subsection{HTTP User-Agent}
 \label{sec:useragent}
 \astroquery identifies itself to host services using the \texttt{HTTP
@@ -307,16 +320,6 @@ program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013--2017.
 
 
-\subsection{Versioning}
-Unlike the core \astropypkg package, \astroquery exists in an `always-unstable' state.
-Because \astroquery relies on remote services' APIs to function, changes to those
-APIs may break \astroquery without warning.  For that reason, we sometimes have
-frequent or sudden version releases to accommodate remote changes.
-
-Some services have been helpful about alerting the \astroquery development team
-in advance when API changes are imminent.  We are grateful for such advance
-warning and encourage other services to check in and file issues on \astroquery's
-issue tracker when significant API modifications are made.
 
 \subsection{Relation to the VO}
 \label{sec:vo}
