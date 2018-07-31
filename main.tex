@@ -1,12 +1,10 @@
-\documentclass[twocolumn]{aastex61}
+\documentclass[twocolumn]{aastex62}
 
 \usepackage[utf8]{inputenc}
 \usepackage{xspace}
 \usepackage{url}
 \usepackage{listings}
 \usepackage{inconsolata} % standard "prettier" astropy latex font
-
-\usepackage{listings}
 
 \newcommand{\package}[1]{\texttt{#1}\xspace}
 \newcommand{\astroquery}{\package{astroquery}}
@@ -42,18 +40,21 @@
 
 \begin{abstract}
 \astroquery is a collection of tools for requesting data from databases hosted
-on the internet, particularly those with web pages but without formal
-application program interfaces (APIs).  These tools are based on the Python
+on remote servers with interfaces exposed on the internet, including those with
+web pages but without formal application program interfaces (APIs).  These
+tools are based on the Python
 \package{requests} package, which is used to make HTTP requests, and
 \astropypkg, which provides most of the data parsing functionality. \astroquery
-has received significant contributions from the broader astronomical community,
+has received significant contributions from throughout the astronomical community,
 including several significant contributions from telescope archives.
 \astroquery enables the creation of fully reproducible workflows from data
 acquisition through publication.  This document describes the philosophy, basic
 structure, and development model of the \astroquery package.
-\footnote{
-The repository associated with this paper is:
-https://github.com/adamginsburg/astroquery-paper
+The complete documentation for astroquery can be found at
+\url{http://astroquery.readthedocs.io/}.
+\footnote{%
+The repository associated with this paper is:\\
+\url{https://github.com/adamginsburg/astroquery-paper}
 }
 \end{abstract}
 
@@ -77,8 +78,8 @@ While many different efforts to promote data sharing have made it more
 common, it is difficult to keep track of how and where to retrieve a given data
 set. A common scripted interface to tie all these services together is a good
 way to make all the different data more accessible, and it provides authors
-with the ability to make the full analysis process they used - from data
-download to publication - repeatable.
+with the ability to make the full analysis process they used -- from data
+download to publication -- repeatable.
 
 Data sharing has taken on a variety of forms.  The most prominent are the major
 observatory archives: MAST, NOAO, ESO, IPAC, CADC, CDS (hosting Vizier and
@@ -91,7 +92,7 @@ while the observer is not on-site.
 In addition to observatories and telescopes, individual surveys often share
 their full data sets.  In some cases, these data sets are shared via the
 observatory that acquired them, for example, the all-sky data acquired with
-Planck, WMAP, and COBE.  Other surveys, particularly ground-based surveys,
+Planck, WMAP, and COBE\@.  Other surveys, particularly ground-based surveys,
 serve their own data.  Examples include SDSS, 2MASS, UKIDSS, and likely many
 more in the near future.
 
@@ -291,19 +292,20 @@ most individual modules have been implemented independently by interested
 contributors.
 
 Some contributions have come as direct institutional support.  The ESA GAIA and
-ESASky modules were provided by developers working for ESA.  Meanwhile, the
+ESASky modules were provided by developers working for ESA\@.  Meanwhile, the
 MAST and VO Cone Search query tools were added by developers at STSCI, with the
 latter moved over from \texttt{astropy.vo} (see Section \ref{sec:vo}).
 
 \astroquery also receives contributions from funded programs. For instance, the
-JPLHorizons module has been implemented as part of the \texttt{sbpy} project
-with support from NASA PDART. Further Solar System-related services are planned
-to be added to \astroquery through this support.  
+JPLHorizons module has been implemented as part of the \texttt{sbpy}
+project\footnote{\url{http://sbpy.org}} with support from NASA PDART grant
+80NSSC18K0987. Further Solar System-related services are planned to be added to
+\astroquery through this support.
 
 
 \astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
-from 2013-2017.
+from 2013--2017.
 
 
 \subsection{Versioning}
@@ -340,7 +342,7 @@ to use the more sophisticated VO tools that underly these tools
 
 Some general VO tools are available in astroquery.  The \texttt{vo\_conesearch}
 package, which originally resided in \astropy, is now part of \astroquery.  VO
-Cone Search has \texttt{query\_*\_region} interface like the other \astroquery
+Cone Search has a \texttt{query\_region} interface like the other \astroquery
 services in addition to the existing interfaces ported over from \astropypkg.
 As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists; therefore,
 \astroquery is now the primary provider of this VO Cone Search service. From a
@@ -393,8 +395,12 @@ We welcome any new contributions.
 In this appendix, we show an example of \astroquery in action, highlighting the
 ability to use multiple modules and interact with \astropypkg's table, coordinate,
 and unit tools.  This example approximately reproduces Figure 1 of
-\citet{Eisner2016a}, but with a different background.
-It can also be found on \astropypkg's gallery page (\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
+\citet{Eisner2016a}, but with a different background.  It can also be found on
+\astropypkg's gallery page
+(\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
+Another illustration of how to use astroquery tools in a finder chart making 
+tool is \texttt{fcmaker}, which produces charts for ESO observations using
+\astroquery \citep{Vogt2018a}.
 
 
 \newpage
