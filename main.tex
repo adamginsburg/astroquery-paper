@@ -251,7 +251,7 @@ logging in to services that require user authentication.
 \astroquery testing is somewhat different from most other packages in the Python
 ecosystem.  While the tests are based on the \astropypkg package-template and use
 \package{pytest} to run and check the outputs, the \astroquery tests are split into
-\emph{remote} and \emph{non-remote}.  The remote tests exactly replicate what a user
+\emph{remote} and \emph{local}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
 remote services.  Historically, we have found that it is quite rare for all of
 the \astroquery-supported services to be accessible simultaneously.
@@ -267,7 +267,7 @@ query mechanisms and the data parsers.  Monkeypatching in the context of
 than typical Python code, but a set of tests independent of the remote services
 is necessary.
 
-The non-remote tests are run as part of the continuous integration for the
+The local tests are run as part of the continuous integration for the
 project with each commit.  The remote tests are run as part of a
 regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
 also helps reduce the burden on the remote services.
