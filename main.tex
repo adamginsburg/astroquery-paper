@@ -225,11 +225,12 @@ applicable:
         specification of the radius around which to search.
         The returned object is an \astropypkg \texttt{Table}.
     \item \texttt{query\_object} - A function that accepts the name of an
-        object.  This method relies on the service to resolve the object name.
+        object.  This method relies on the service to resolve the object name, i.e., it does not use a name resolver
+        like \texttt{SESAME}\footnote{\url{http://cds.u-strasbg.fr/cgi-bin/Sesame}}.
         The returned object is an \astropypkg \texttt{Table}.
     \item \texttt{get\_images} - For services that provide image data, this
         function accepts an \astropypkg \texttt{SkyCoord} and a radius to search for data
-        that cover the specified target. The returned object should be a list
+        that cover the specified target. The returned object is a list
         of \texttt{astropy.io.fits.HDUList} objects.
 \end{itemize}
 
@@ -249,13 +250,18 @@ these \texttt{\_async} functions because a wrapper tool exists to convert
 Deviations from this standard API are documented in the \astroquery
 documentation (see Section \ref{sec:documentation}).
 
-\subsection{Layout of the base Query module and the QueryWithLogin module}
+\subsection{Caching and login functionality}
 For new module development, there are tools provide to handle various aspects
 of querying that are common across all modules.  The \texttt{BaseQuery}
 metaclass provides tools for caching requests and downloaded data, reducing the
-network load for repeated queries.  It is responsible for setting the
-User-Agent (\S \ref{sec:useragent}).  Finally, it provides a framework for
-logging in to services that require user authentication.
+network load for repeated queries.  Cached data are stored in the user's
+\texttt{~/.astropy/cache/astroquery} directory.  The \texttt{BaseQuery}
+metaclass is also responsible for setting the User-Agent (\S
+\ref{sec:useragent}).  The \texttt{QueryWithLogin} metaclass provides a
+framework for logging in to services that require user
+authentication.
+
+
 
 \subsection{Testing}
 \astroquery testing is somewhat different from most other packages in the Python
@@ -271,8 +277,9 @@ having an internet connection.  These tests rely on
 \emph{monkeypatching}\footnote{Monkeypatching is the dynamic replacement of
 attributes at runtime, i.e., changing what functions do after they are
 imported.} to
-replace the remote requests, instead using locally available files to test the
-query mechanisms and the data parsers.  Monkeypatching in the context of
+replace the remote requests. Instead of downloading data, the test suite uses
+locally available files to test the query mechanisms and the data parsers.
+Monkeypatching in the context of
 \package{pytest} results in code that is generally more difficult to understand
 than typical Python code, but a set of tests independent of the remote services
 is necessary.
@@ -280,15 +287,15 @@ is necessary.
 The local tests are run as part of the continuous integration for the
 project with each commit.  The remote tests are run as part of a
 regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
-also helps reduce the burden on the remote services.
+helps reduce the burden on the remote services.
 
 \subsection{Other utilities}
 There are several general-use utilities implemented as part of \astroquery, such
 as a bulk FITS file downloader and renamer and a download progressbar.  There
 is also a schema system implemented to allow user-side parameter validation.
-So far, at the time of writing, this tool is only implemented in the ESO and
-Vizier modules, but it could be expanded to other modules to reduce the number
-of doomed-to-fail queries sent through \astroquery.
+The schema tool is only implemented in the ESO and Vizier modules, but it could
+be expanded to other modules to reduce the number of doomed-to-fail queries
+sent through \astroquery.
 
 \section{Development history and status}
 \label{sec:development}
@@ -314,7 +321,7 @@ most individual modules have been implemented independently by interested
 contributors.
 
 Some contributions have come as direct institutional support.  The ESA GAIA and
-ESASky modules were provided by developers working for ESA\@.  Meanwhile, the
+ESASky modules were provided by developers working for ESA\@.  The
 MAST and VO Cone Search query tools were added by developers at STSCI, with the
 latter moved over from \texttt{astropy.vo} (see Section \ref{sec:vo}).
 
@@ -342,7 +349,7 @@ the hosting service.  The general philosophy in \astroquery is to
 replicate the web page interface provided by a given service as closely as
 possible.  While this approach makes some versions of cross-archive searches
 more difficult, it keeps the barrier to entry for new users fairly low and limits
-the maintenance burden for developers.
+the maintenance burden for upstream developers.
 
 However, there are developments in progress to allow more VO-like queries
 within \astroquery, such as searching for databases by keywords.  As more
@@ -353,7 +360,7 @@ to use the more sophisticated VO tools that underly these tools
 
 
 Some general VO tools are available in astroquery.  The \texttt{vo\_conesearch}
-package, which originally resided in \astropy, is now part of \astroquery.  VO
+package, which originally resided in \astropypkg, is now part of \astroquery.  VO
 Cone Search has a \texttt{query\_region} interface like the other \astroquery
 services in addition to the existing interfaces ported over from \astropypkg.
 As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists; therefore,
