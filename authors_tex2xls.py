@@ -1,5 +1,6 @@
 import re
 from collections import defaultdict
+import string
 
 import pandas as pd
 
@@ -28,17 +29,58 @@ def parse_tex(filename='authors.tex', outfile='Authors_Astroquery.xls',
 
     pd.set_option('display.max_colwidth', -1)  # Do not truncate
     df = pd.DataFrame(columns=[
-        'Is Corresponding Author', 'Author Order', 'Title', 'Name', 'Email',
+        'Is Corresponding Author', 'Author Order', 'Title', 'Given Name/First Name',
+        "Middle Initial(s) or Name", 'Family Name/Surname', 'Email',
         'Telephone', 'Institution'])
 
+    def parsename(name):
+        components = name.split()
+        first = components.pop(0)
+        last = components.pop(-1)
+        middle = " ".join(components)
+        return {"first": first,
+                "middle": middle,
+                "last": last}
+    
+    def parseaffil(affil):
+        components = [x.strip() for x in affil.split(",")]
+        success = False
+        for ii,com in enumerate(components):
+            if len(com) > 0 and (com[0] in string.digits or com[-1] in string.digits):
+                address = components[ii:]
+                success = True
+                break
+        if not success:
+            return
+
+        print(address)
+
+        result = {'Address Line 1': address[0],
+                  'Address Line 2': "",
+                  'City': address[1],
+                  'State/Province': address[2].split()[0] if len(address) > 3 else "",
+                  'Zip/Postal Code': address[2].split()[1] if len(address) > 3 else "",
+                  'Country': address[3] if len(address) > 3 else address[2],
+                 }
+
+        return result
+
+
     def _insert_df_row(df, author_info):
+        namedict = parsename(author_info['name'])
+        address = parseaffil(author_info['affil'])
+        print(address)
         return df.append({'Is Corresponding Author': author_info['corresp'],
                           'Author Order': author_info['order'],
                           'Title': '',
-                          'Name': author_info['name'],
+                          'Given Name/First Name': namedict['first'],
+                          'Middle Initial(s) or Name': namedict['middle'],
+                          'Family Name/Surname': namedict['last'],
                           'Email': author_info['email'],
                           'Telephone': '',
-                          'Institution': author_info['affil']},
+                          'Institution': author_info['affil'],
+                          'Department': '',
+                         },
                          ignore_index=True)
 
     for line in all_lines:
