@@ -40,9 +40,9 @@
 
 \begin{abstract}
 \astroquery is a collection of tools for requesting data from databases hosted
-on remote servers with interfaces exposed on the internet particular focus to those with
+on remote servers with interfaces exposed on the internet, including those with
 web pages but without formal application program interfaces (APIs).  These
-tools are build on the Python
+tools are built on the Python
 \package{requests} package, which is used to make HTTP requests, and
 \astropypkg, which provides most of the data parsing functionality. \astroquery
 has received significant contributions from throughout the astronomical community,
@@ -95,13 +95,13 @@ In addition to observatories and telescopes, individual surveys often share
 their full data sets.  In some cases, these data sets are shared via the
 observatory that acquired them, for example, the all-sky data acquired with
 Planck, WMAP, and COBE\@.  Other surveys, particularly ground-based surveys,
-serve their own data.  Examples include SDSS, 2MASS, UKIDSS, VSA.
+serve their own data.  Examples include SDSS, 2MASS, UKIDSS, and VSA.
 
 %TODO: mention data collector sites, too, nasa\_exoplanet\_archive, simbad,
 %skyview, OAC, etc.
 
 Individual teams and small groups often share their data via their own
-custom websites, too.  These services do not follow any particular standard and can
+custom websites.  These services do not follow any particular standard and can
 be widely varied in the type and amount of data shared.  Sometimes these data
 are shared via the archive systems (e.g., IRSA at IPAC hosts many individual
 survey data sets), while others use their own web hosting systems \citep[e.g.,
@@ -139,7 +139,7 @@ interface, but are meant to be used independently.  They are primarily based on
 a common framework that uses the Python \package{requests} package to perform
 HTTP requests to communicate with web services.
 
-For new service development, there is a \texttt{template module} that lays
+For new service development, there is a \texttt{template\_module} that lays
 out the basic framework of any new module.  All modules have a single core
 \texttt{class} that has some number of associated \texttt{query\_*} methods.
 The most common query methods are \texttt{query\_region}, which usually
@@ -158,9 +158,9 @@ result_table = Simbad.query_region("m81")
 In this example, \texttt{Simbad} is an instance of the
 \texttt{astroquery.simbad.SimbadClass} class.
 
-While there is a common suggested API described in the \texttt{template module},
+While there is a common suggested API described in the \texttt{template\_module},
 individual packages are not \emph{required} to support this API because, for
-some, it is not practical or even possible.  For example, the atomic and molecular databases refer
+some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
 their \astroquery modules cannot include \texttt{query\_region} methods. The
 same applies to Solar System object ephemerides queries. Differences in the API
@@ -212,7 +212,7 @@ are being submitted.
 
 
 \subsection{The API}
-The common API has a few features defined in the \texttt{template} module.
+The common API has a few features defined in the \texttt{template\_module}.
 Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
@@ -229,6 +229,7 @@ applicable:
         function accepts an \astropypkg \texttt{SkyCoord} and a radius to search for data
         that cover the specified target. The returned object is a list
         of \texttt{astropy.io.fits.HDUList} objects.
+
 \end{itemize}
 
 Beyond these basic functions, there is a series of functions with the same
