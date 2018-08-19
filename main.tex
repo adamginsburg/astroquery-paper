@@ -139,7 +139,7 @@ interface, but are meant to be used independently.  They are primarily based on
 a common framework that uses the Python \package{requests} package to perform
 HTTP requests to communicate with web services.
 
-For new service development, there is a \texttt{template\_module} that lays
+For new service development, there is a \texttt{template} module that lays
 out the basic framework of any new module.  All modules have a single core
 \texttt{class} that has some number of associated \texttt{query\_*} methods.
 The most common query methods are \texttt{query\_region}, which usually
@@ -158,7 +158,7 @@ result_table = Simbad.query_region("m81")
 In this example, \texttt{Simbad} is an instance of the
 \texttt{astroquery.simbad.SimbadClass} class.
 
-While there is a common suggested API described in the \texttt{template\_module},
+While there is a common suggested API described in the \texttt{template} module,
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
@@ -212,7 +212,7 @@ are being submitted.
 
 
 \subsection{The API}
-The common API has a few features defined in the \texttt{template\_module}.
+The common API has a few features defined in the \texttt{template} module.
 Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
