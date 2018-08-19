@@ -42,7 +42,7 @@
 \astroquery is a collection of tools for requesting data from databases hosted
 on remote servers with interfaces exposed on the internet, including those with
 web pages but without formal application program interfaces (APIs).  These
-tools are based on the Python
+tools are built on the Python
 \package{requests} package, which is used to make HTTP requests, and
 \astropypkg, which provides most of the data parsing functionality. \astroquery
 has received significant contributions from throughout the astronomical community,
@@ -84,42 +84,39 @@ also safeguards against inevitable `link rot' on data archives, moving some of
 the responsibility for maintaining long-term reproducibility from the
 individual researcher to the broader community.
 
-
-Data sharing has taken on a variety of forms.  The most prominent are the major
-observatory archives: MAST, NOAO, ESO, IPAC, CADC, CDS (hosting Vizier and
-SIMBAD), NRAO, CXC, HEASARC, and ESA are the main
-organizations hosting raw and processed data from ground and space based
-telescopes.  These data archives also serve as the primary means for serving data
-to users when the data are taken in queue mode, i.e., when the data are taken
-while the observer is not on-site.
+Data sharing has taken on a variety of forms.  The most prominent are the
+major observatory archives: MAST, NOAO, ESO, ESA, IPAC, CDS, NRAO, CXC, HEASARC,
+and CADC are the main organizations hosting raw and processed data from
+ground and space based telescopes.  These data archives also serve as the
+primary means for serving data to users when the data are taken in queue
+mode, i.e., when the data are taken while the observer is not on-site.
 
 In addition to observatories and telescopes, individual surveys often share
 their full data sets.  In some cases, these data sets are shared via the
 observatory that acquired them, for example, the all-sky data acquired with
 Planck, WMAP, and COBE\@.  Other surveys, particularly ground-based surveys,
-serve their own data.  Examples include SDSS, 2MASS, UKIDSS, and likely many
-more in the near future.
+serve their own data.  Examples include SDSS, 2MASS, UKIDSS, and VSA.
 
-Individual teams and small groups will often share their data via their own
+%TODO: mention data collector sites, too, nasa\_exoplanet\_archive, simbad,
+%skyview, OAC, etc.
+
+Individual teams and small groups often share their data via their own
 custom websites.  These services do not follow any particular standard and can
 be widely varied in the type and amount of data shared.  Sometimes these data
 are shared via the archive systems (e.g., IRSA at IPAC hosts many individual
 survey data sets), while others use their own web hosting systems \citep[e.g.,
 MAGPIS;][]{Helfand2006}.
 
-Finally, there are other data types relevant to astronomy that are not served
-by the typical astronomical databases.  Examples include databases of molecular
-and atomic properties, such as those provided by
-Splatalogue\footnote{\url{http://www.splatalogue.net/}} and the NIST Atomic
-Spectra
-Database\footnote{\url{https://www.nist.gov/pml/atomic-spectra-database}}, or
-services that are computationally intensive or require constant updates, like
-Solar System ephemerides\footnote{e.g.,
-\url{https://ssd.jpl.nasa.gov/?ephemerides}}.  
+Finally, there are other data types relevant to astronomy that are not
+served by the typical astronomical databases.  Examples include databases of
+molecular and atomic properties, such as those provided by Splatalogue and
+the NIST Atomic Spectra Database, or services that are computationally
+intensive or require constant updates, like Solar System ephemerides
+provided by services like JPL HORIZONS, or the Minor Planet Center.
 
-\astroquery arose from a desire to access these databases from the command line
+\astroquery arose from a desire to access these databases from the Python command line
 in a scriptable fashion.  Script-based data access provides astronomers with
-the ability to make reproducible analysis scripts in which the data are
+the ability to make reproducible analysis scripts and pipelines in which the data are
 acquired and processed into scientifically relevant results with minimal
 user interaction.
 
@@ -142,25 +139,26 @@ interface, but are meant to be used independently.  They are primarily based on
 a common framework that uses the Python \package{requests} package to perform
 HTTP requests to communicate with web services.
 
-For new development, there is a \texttt{template}  that lays out the basic
-framework of any new module.  All modules have a single core
+For new service development, there is a \texttt{template\_module} that lays
+out the basic framework of any new module.  All modules have a single core
 \texttt{class} that has some number of associated \texttt{query\_*} methods.
-The most common query methods are \texttt{query\_region}, which usually provide
-a ``cone search'' functionality, i.e., they search for data within a circularly
-symmetric region projected on the sky.
+The most common query methods are \texttt{query\_region}, which usually
+provide a ``cone search'' functionality, i.e., they search for data within a
+circularly symmetric region projected on the sky. The returned results of
+the queries then are returned in an \astropypkg
+\citep{Astropy-Collaboration2018, Astropy-Collaboration2013}
+\texttt{Table}\footnote{\url{http://docs.astropy.org/en/stable/table/}}.
 
-An example using the SIMBAD interface is shown below (see
-\url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}):
+An example using the SIMBAD interface is shown below:\footnote{see
+\url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}}
 \begin{lstlisting}[caption=Query SIMBAD for a region around M81]
 from astroquery.simbad import Simbad
 result_table = Simbad.query_region("m81")
 \end{lstlisting}
 In this example, \texttt{Simbad} is an instance of the
 \texttt{astroquery.simbad.SimbadClass} class.
-The returned result, stored in the variable \texttt{result\_table},
-is an \astropypkg table\footnote{\url{http://docs.astropy.org/en/stable/table/}}.
 
-While there is a common suggested API described in the \texttt{template} module,
+While there is a common suggested API described in the \texttt{template\_module},
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
 to physical data that is not related to positions on the sky and therefore
@@ -173,18 +171,17 @@ are discussed in the \astroquery documentation (see Section
 \label{sec:versionnumbers}
 \astroquery uses the same format as traditional semantic versioning,
 with versions indicated in the format \texttt{MAJOR.MINOR.PATCH.devCOMMIT\_ID} (for
-example, \texttt{0.3.9.dev4581}).  
+example, \texttt{0.3.9.dev4581}).
 
-Starting in mid-2018, \astroquery switched from a manual release model to a
+\astroquery patches are frequently made to accommodate upstream changes, i.e.,
+changes made to the remote service, and as such are not guaranteed to be
+backward-compatible. Thus, starting in mid-2018, \astroquery switched from a manual release model to a
 continuous deployment model.  Prior to this change, the
 \texttt{MAJOR.MINOR.PATCH} versions were each created manually by one of the
 maintainers, then pushed to package release services.  After this change, each
 accepted pull request automatically triggered a new release via the python
-package index\footnote{\url{https://pypi.org/}}. 
+package index\footnote{\url{https://pypi.org/}}.
 
-\astroquery patches are frequently made to accommodate upstream changes, i.e.,
-changes made to the remote service, and as such are not guaranteed to be
-backward-compatible.
 
 %\subsection{Versioning}
 %Unlike the core \astropypkg package, \astroquery exists in an `always-unstable' state.
@@ -215,7 +212,7 @@ are being submitted.
 
 
 \subsection{The API}
-The common API has a few features defined in the \texttt{template} module.
+The common API has a few features defined in the \texttt{template\_module}.
 Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
@@ -232,9 +229,10 @@ applicable:
         function accepts an \astropypkg \texttt{SkyCoord} and a radius to search for data
         that cover the specified target. The returned object is a list
         of \texttt{astropy.io.fits.HDUList} objects.
+
 \end{itemize}
 
-Beyond these basic functions, there is a series of functions with the same
+Beyond these basic methods, there is a series of functions with the same
 names, but with the additional suffix \texttt{\_async}.  The
 \texttt{query\_*\_async} functions return a \texttt{requests.Response} object
 from the accessed website, providing developers with
@@ -243,7 +241,7 @@ metadata (i.e., the \texttt{async} methods do not download the corresponding
 data, so they may be useful for collecting metadata for very large files).  The
 \texttt{get\_images\_async} method returns
 \texttt{FileContainer} objects that similarly provide `lazy' access to the
-data, but specifically for FITS files.  Developers need only implement
+data, but specifically for FITS files.  Contributors need only implement
 these \texttt{\_async} functions because a wrapper tool exists to convert
 \texttt{\_async} functions into their corresponding non-asynchronous versions.
 
@@ -258,35 +256,34 @@ network load for repeated queries.  Cached data are stored in the user's
 \texttt{~/.astropy/cache/astroquery} directory.  The \texttt{BaseQuery}
 metaclass is also responsible for setting the User-Agent (\S
 \ref{sec:useragent}).  The \texttt{QueryWithLogin} metaclass provides a
-framework for logging in to services that require user
+framework for secure logging in to services that require user
 authentication.
 
 
 
 \subsection{Testing}
 \astroquery testing is somewhat different from most other packages in the Python
-ecosystem.  While the tests are based on the \astropypkg package-template and use
+ecosystem.  While the tests are based on the \astropypkg testing infrastructure and use
 \package{pytest} to run and check the outputs, the \astroquery tests are split into
 \emph{remote} and \emph{local}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
-remote services.  Historically, we have found that it is quite rare for all of
-the \astroquery-supported services to be accessible simultaneously.
+remote services.
 
-We therefore require that each module provide some tests that do not rely on
-having an internet connection.  These tests rely on
-\emph{monkeypatching}\footnote{Monkeypatching is the dynamic replacement of
-attributes at runtime, i.e., changing what functions do after they are
-imported.} to
-replace the remote requests. Instead of downloading data, the test suite uses
-locally available files to test the query mechanisms and the data parsers.
-Monkeypatching in the context of
-\package{pytest} results in code that is generally more difficult to understand
-than typical Python code, but a set of tests independent of the remote services
-is necessary.
+In our experience it is quite rare for all of the \astroquery-supported
+services to be accessible simultaneously. We therefore require that each
+module provide some tests that do not rely on having an internet connection.
+These tests rely on \emph{monkeypatching}\footnote{Monkeypatching is the
+  dynamic replacement of attributes at runtime, i.e., changing what
+  functions do after they are imported.} to replace the remote
+requests. Instead of downloading data, the test suite uses locally available
+files to test the query mechanisms and the data parsers.  Monkeypatching in
+the context of \package{pytest} results in code that is generally more
+difficult to understand than typical Python code, but a set of tests
+independent of the remote services is necessary.
 
 The local tests are run as part of the continuous integration for the
-project with each commit.  The remote tests are run as part of a
-regularly-scheduled \texttt{cron} job.  Running the remote tests infrequently
+project with each commit.  The remote tests are run for merges and as part of a
+regularly-scheduled \texttt{cron} job.  Running the remote tests less frequently
 helps reduce the burden on the remote services.
 
 \subsection{Other utilities}
@@ -306,7 +303,7 @@ of new contributions, including new modules, upgrades to existing modules, and
 minor corrections to existing tools.
 
 \astroquery is an \astropy coordinated package \citep{APE15} and is a critical
-component of the \astropy Project ecosystem \citep{Astropy-Collaboration2013a}.
+component of the \astropy Project ecosystem \citep{Astropy-Collaboration2018}.
 It is a standalone project and will remain independent of the \astropypkg core
 package\footnote{Many \astropy affiliated packages are developed with the
 intent of eventually including them in the core of \astropypkg.  In contrast,
@@ -320,21 +317,20 @@ burden is shouldered by two people at any given time (the first two authors),
 most individual modules have been implemented independently by interested
 contributors.
 
-Some contributions have come as direct institutional support.  The ESA GAIA and
-ESASky modules were provided by developers working for ESA\@.  The
-MAST and VO Cone Search query tools were added by developers at STSCI, with the
+Some contributions have come with direct institutional support.  The ESA Gaia and
+ESASky modules were provided and supported by developers working for ESA\@.  The
+MAST and VO Cone Search query tools were added by developers at STScI, with the
 latter moved over from \texttt{astropy.vo} (see Section \ref{sec:vo}).
 
-\astroquery also receives contributions from funded programs. For instance, the
+\astroquery also receives contributions from other funded programs. For instance, the
 JPLHorizons module has been implemented as part of the \texttt{sbpy}
 project\footnote{\url{http://sbpy.org}} with support from NASA PDART grant
 80NSSC18K0987. Further Solar System-related services are planned to be added to
 \astroquery through this support.
 
-
 \astroquery has received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
-from 2013--2017.
+from 2013--2014.
 
 
 
@@ -381,23 +377,6 @@ We include one detailed example of how to use \astroquery in Appendix \ref{sec:e
 but interested users will find many more on the documentation page and
 in the example gallery (\url{https://astroquery.readthedocs.io/en/latest/gallery.html}).
 
-\subsection{Other Documents}
-Several authors have independently described how to use various \astroquery
-modules, which is a helpful practice we encourage.
-
-\begin{itemize}
-    \item
-        \url{https://www.cosmosim.org/cms/news/cosmosim-package-for-astroquery/}:
-        a worked example of downloading data from the cosmosim database,
-        including logging in.
-    \item \url{https://arxiv.org/abs/1408.7026}: a worked example of querying
-        Vizier and SIMBAD to make a surface gravity - effective temperature
-        plot for a star survey
-    \item \citet{Guillochon2018a}: the definition of
-        the Open Astronomy Catalog API and a description of the astroquery
-        module built to use it.
-\end{itemize}
-
 \section{Summary}
 \astroquery is a toolkit for accessing remotely hosted data through Python.
 It is part of the \astropypkg affiliated package system.
@@ -417,7 +396,7 @@ and unit tools.  This example approximately reproduces Figure 1 of
 \citet{Eisner2016a}, but with a different background.  It can also be found on
 \astroquery's gallery page
 (\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
-Another illustration of how to use astroquery tools in a finder chart making 
+Another illustration of how to use astroquery tools in a finder chart making
 tool is \texttt{fcmaker}, which produces charts for ESO observations using
 \astroquery \citep{Vogt2018a}.
 
