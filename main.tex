@@ -114,11 +114,11 @@ the NIST Atomic Spectra Database, or services that are computationally
 intensive or require constant updates, like Solar System ephemerides
 provided by services like JPL HORIZONS, or the Minor Planet Center.
 
-\astroquery arose from a desire to access these databases from the Python command line
-in a scriptable fashion.  Script-based data access provides astronomers with
-the ability to make reproducible analysis scripts and pipelines in which the data are
-acquired and processed into scientifically relevant results with minimal
-user interaction.
+\astroquery arose from a desire to access these databases from the Python
+command line in a scriptable fashion.  Script-based data access provides
+astronomers with the ability to make reproducible analysis scripts and
+pipelines in which the data are retrieved and processed into scientifically
+relevant results with minimal user interaction.
 
 In this paper, we provide an overview of the \astroquery package.  Section
 \ref{sec:software} describes the basic layout of the software and the shared
@@ -155,8 +155,9 @@ An example using the SIMBAD interface is shown below:\footnote{see
 from astroquery.simbad import Simbad
 result_table = Simbad.query_region("m81")
 \end{lstlisting}
-In this example, \texttt{Simbad} is an instance of the
-\texttt{astroquery.simbad.SimbadClass} class.
+In this example, \texttt{Simbad} is an instance of 
+\texttt{astroquery.simbad.SimbadClass}, and \texttt{result\_table} is an
+\texttt{astropy.table.Table} containing the objects near M81.
 
 While there is a common suggested API described in the \texttt{template\_module},
 individual packages are not \emph{required} to support this API because, for
@@ -252,12 +253,12 @@ documentation (see Section \ref{sec:documentation}).
 For new module development, there are tools provide to handle various aspects
 of querying that are common across all modules.  The \texttt{BaseQuery}
 metaclass provides tools for caching requests and downloaded data, reducing the
-network load for repeated queries.  Cached data are stored in the user's
-\texttt{~/.astropy/cache/astroquery} directory.  The \texttt{BaseQuery}
-metaclass is also responsible for setting the User-Agent (\S
+duration and the network load for repeated queries.  Cached data are
+stored in the user's \texttt{\textasciitilde/.astropy/cache/astroquery} directory.  The
+\texttt{BaseQuery} metaclass is also responsible for setting the User-Agent (\S
 \ref{sec:useragent}).  The \texttt{QueryWithLogin} metaclass provides a
-framework for secure logging in to services that require user
-authentication.
+framework for secure logging in to services that require user authentication,
+including a credential storage mechanism based on the \texttt{keyring} module.
 
 
 
@@ -301,7 +302,7 @@ Anyone can contribute to \astroquery.  The maintainers are committed to helping
 developers make new modules that meet the requirements of \astroquery.  This
 section describes how \astroquery has been developed, but we welcome all sorts
 of new contributions, including new modules, upgrades to existing modules, and
-minor corrections to existing tools.
+minor corrections to existing tools from both individuals and institutions.
 
 \astroquery is an \astropy coordinated package \citep{APE15} and is a critical
 component of the \astropy Project ecosystem \citep{Astropy-Collaboration2018}.
@@ -373,10 +374,10 @@ instead of \texttt{from astropy.vo.client import conesearch}).
 \label{sec:documentation}
 \subsection{Online documentation}
 The \astroquery modules are documented online and can be accessed through
-readthedocs at \url{https://astroquery.readthedocs.io/en/latest/}.
+readthedocs at \url{https://astroquery.readthedocs.io/}.
 We include one detailed example of how to use \astroquery in Appendix \ref{sec:example},
 but interested users will find many more on the documentation page and
-in the example gallery (\url{https://astroquery.readthedocs.io/en/latest/gallery.html}).
+in the example gallery\footnote{\url{https://astroquery.readthedocs.io/en/latest/gallery.html}}.
 
 \subsection{Other Documents}
 Several authors have independently described how to use various \astroquery
@@ -386,7 +387,7 @@ modules, which is a helpful practice we encourage.
         Cosmosim\footnote{\url{https://www.cosmosim.org/cms/news/cosmosim-package-for-astroquery/}}:
         a worked example of downloading data from the cosmosim database,
         including logging in.
-    \item \url{https://arxiv.org/abs/1408.7026}: a worked example of querying
+    \item \citet{Paletou2014a}: a worked example of querying
         Vizier and SIMBAD to make a surface gravity - effective temperature
         plot for a star survey
     \item \citet{Guillochon2018a}: the definition of
@@ -401,10 +402,11 @@ modules, which is a helpful practice we encourage.
 
 
 \section{Summary}
-\astroquery is a toolkit for accessing remotely hosted data through Python.
-It is part of the \astropypkg affiliated package system.
-We have described its general layout and development model.
-We welcome any new contributions.
+\astroquery is a toolkit for accessing remotely hosted astronomical
+data through Python.  It is part of the \astropypkg affiliated package system.
+We have described its general layout, its development model, and its role in
+developing reproductible workflows.  \astroquery is developed for and by our
+community: we welcome any new contributions.
 
 
 \bibliographystyle{aasjournal}
