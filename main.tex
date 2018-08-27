@@ -4,7 +4,12 @@
 \usepackage{xspace}
 \usepackage{url}
 \usepackage{listings}
+\usepackage[T1]{fontenc} % https://tex.stackexchange.com/questions/166790/how-can-i-get-straight-double-quotes-in-listings
+\usepackage{textcomp} % https://tex.stackexchange.com/questions/166790/how-can-i-get-straight-double-quotes-in-listings
 \usepackage{inconsolata} % standard "prettier" astropy latex font
+\lstset{upquote=true} % https://tex.stackexchange.com/questions/166790/how-can-i-get-straight-double-quotes-in-listings
+\lstset{basicstyle=\ttfamily}
+
 
 \newcommand{\package}[1]{\texttt{#1}\xspace}
 \newcommand{\astroquery}{\package{astroquery}}
@@ -149,10 +154,10 @@ the queries then are returned in an \astropypkg
 \citep{Astropy-Collaboration2018, Astropy-Collaboration2013}
 \texttt{Table}\footnote{\url{http://docs.astropy.org/en/stable/table/}}.
 
-An example using the SIMBAD interface is shown below:\footnote{see
-\url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}}
-\begin{lstlisting}[caption=Query SIMBAD for a region around M81]
-from astroquery.simbad import Simbad
+An example using the SIMBAD interface is shown
+below:\footnote{\url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}}
+\begin{lstlisting}[caption=Query SIMBAD for a region around M81] from
+astroquery.simbad import Simbad
 result_table = Simbad.query_region("m81")
 \end{lstlisting}
 In this example, \texttt{Simbad} is an instance of 
