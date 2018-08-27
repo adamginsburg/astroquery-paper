@@ -1,4 +1,5 @@
-
+# Create a finder chart and overlay two catalogs using the Vizier and SkyView
+# tools
 from astropy import units as u
 from astropy.coordinates import SkyCoord
 from astropy.wcs import WCS
