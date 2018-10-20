@@ -269,7 +269,24 @@ stored in the user's \texttt{\textasciitilde/.astropy/cache/astroquery} director
 framework for secure logging in to services that require user authentication,
 including a credential storage mechanism based on the \texttt{keyring} module.
 
+\subsection{Error handling}
+Some queries will inevitably fail.  Failures can take on different modes.  For
+common and expected modes, such as searching for an object or location on the
+sky and getting no results, the result is clearly communicated as a simple null
+result or empty table.  For unpredictable and unexpected errors, such as server
+failures, timeouts, and other related communication issues, the errors are handled
+by the \texttt{requests} module, and normal HTTP responses are returned (e.g.,
+HTTP 200 means the request was successful, while 503 indicates the request
+was forbidden by server-side permissions;  a complete list can be found at
+\url{https://en.wikipedia.org/wiki/List_of_HTTP_status_codes}).
 
+In some cases, when we know a particular failure mode is likely (because the
+developers have encountered it at least once), we catch and raise a specific
+\texttt{Exception} or \texttt{Warning}.  The full list of these is in the 
+\texttt{exceptions.py} file.  Developers can use these custom exceptions
+to build in additional robustness to data pipelines using \astroquery
+by either implementing workarounds to known issues or correctly informing
+users of the problem.
 
 \subsection{Testing}
 \astroquery testing is somewhat different from most other packages in the Python
@@ -280,7 +297,12 @@ would enter at the command line, but they are dependent on the stability of the
 remote services.
 
 In our experience it is quite rare for all of the \astroquery-supported
-services to be accessible simultaneously. We therefore require that each
+services to be accessible simultaneously\footnote{While this issue affects
+testing, it rarely affects users, since simply retrying a query is often
+enough to fix user issues.  When the servers are simply down or broken,
+\astroquery is affected, and the resulting errors are sometimes unpredictable;
+users are encouraged to report such failures as Issues so that better error
+messages can be provided.}. We therefore require that each
 module provide some tests that do not rely on having an internet connection.
 These tests rely on \emph{monkeypatching}\footnote{Monkeypatching is the
   dynamic replacement of attributes at runtime, i.e., changing what
@@ -303,7 +325,8 @@ tools complement similar features in \astropypkg).  There
 is also a schema system implemented to allow user-side parameter validation.
 The schema tool is only implemented in the ESO and Vizier modules, but it could
 be expanded to other modules to reduce the number of doomed-to-fail queries
-sent through \astroquery.
+sent through \astroquery (i.e., it is intended to prevent the user from sending
+queries that the server will be unable to handle).
 
 \section{Development history and status}
 \label{sec:development}
