@@ -48,7 +48,8 @@
 on remote servers with interfaces exposed on the internet, including those with
 web pages but without formal application program interfaces (APIs).  These
 tools are built on the Python
-\package{requests} package, which is used to make HTTP requests, and
+\package{requests} package,
+which is used to make HTTP requests, and
 \astropypkg, which provides most of the data parsing functionality.
 \astroquery modules generally attempt to replicate the web page interface
 provided by a given service as closely as possible, making the transition
@@ -179,28 +180,34 @@ the development model.  Finally, Section \ref{sec:documentation} describes how
 \label{sec:software}
 \astroquery consists of a collection of modules that mostly share a similar
 interface, but are meant to be used independently.  They are primarily based on
-a common framework that uses the Python \package{requests} package to perform
-HTTP requests to communicate with web services.
+a common framework that uses the Python
+\package{requests}\footnote{\url{http://docs.python-requests.org/}} package to
+perform HTTP requests to communicate with web services.
 
-For new service development, there is a \texttt{template\_module} that lays
+For new module development, there is a \texttt{template\_module} consisting of a
+folder with several individual python code files that lays
 out the basic framework of any new module.  All modules have a single core
-\texttt{class} that has some number of associated \texttt{query\_*} methods.
+\texttt{class} that has some number of \texttt{query\_*} methods.
 The most common query methods are \texttt{query\_region}, which usually
 provide a ``cone search'' functionality, i.e., they search for data within a
-circularly symmetric region projected on the sky. The returned results of
+circular region. The results of
 the queries then are returned in an \astropypkg
 \citep{Astropy-Collaboration2018, Astropy-Collaboration2013}
 \texttt{Table}\footnote{\url{http://docs.astropy.org/en/stable/table/}}.
 
 An example using the SIMBAD interface is shown
 below:\footnote{\url{http://astroquery.readthedocs.io/en/latest/simbad/simbad.html}}
-\begin{lstlisting}[caption=Query SIMBAD for a region around M81] from
-astroquery.simbad import Simbad
+\begin{lstlisting}[caption=Query SIMBAD for a region around M81]
+from astroquery.simbad import Simbad
 result_table = Simbad.query_region("m81")
 \end{lstlisting}
-In this example, \texttt{Simbad} is an instance of 
+In this example, \texttt{Simbad} is an instance of \\
 \texttt{astroquery.simbad.SimbadClass}, and \texttt{result\_table} is an
 \texttt{astropy.table.Table} containing the objects near M81.
+This common interface allows users to use different services and process
+the resulting data in the same manner despite the differences in the underlying
+methods and services (e.g., \texttt{SDSS.query\_region()},
+\texttt{Simbad.query\_region()}, \texttt{NED.query\_region()}, etc.) 
 
 While there is a common suggested API described in the \texttt{template\_module},
 individual packages are not \emph{required} to support this API because, for
@@ -243,42 +250,49 @@ package index\footnote{\url{https://pypi.org/}}.
 \subsection{HTTP User-Agent}
 \label{sec:useragent}
 \astroquery identifies itself to host services using the \texttt{HTTP
-User-Agent} header data.  The format of the User-Agent string is:
+User-Agent} header data, which is automatically produced and sent to the
+archives with every request.
+Users do not need to be aware of this metadata being sent with their
+queries, but the information can be used by data hosting services to determine
+how many users are accessing their service via \astroquery and to assist in
+debugging if improper queries are being submitted.
+
+The format of the user agent string is:
 \[\texttt{astroquery/\{version\} \{requests\_version\}}\] where
 \texttt{\{version\}} is a version number of the form described in \S
 \ref{sec:versionnumbers} and \texttt{\{requests\_version\}} is the
 corresponding version of the Python \package{requests} package. For example:
 \[\texttt{astroquery/0.3.9.dev4863 python-requests/2.14.2}\]
-This information
-can be used by data hosting services to determine how many users are accessing
-their service via \astroquery and to assist in debugging if improper queries
-are being submitted.
 
 
 \subsection{The API}
-The common API has a few features defined in the \texttt{template\_module}.
+The common API has a few features defined in the template module.
 Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
 \begin{itemize}
-    \item \texttt{query\_region} - A function that accepts an \astropypkg
+    \item \texttt{query\_region} - A method that accepts an \astropypkg
         \texttt{SkyCoord} object representing a point on the sky plus a
         specification of the radius around which to search.
         The returned object is an \astropypkg \texttt{Table}.
-    \item \texttt{query\_object} - A function that accepts the name of an
+    \item \texttt{query\_object} - A method that accepts the name of an
         object.  This method relies on the service to resolve the object name, i.e., it does not use a name resolver
         like \texttt{SESAME}\footnote{\url{http://cds.u-strasbg.fr/cgi-bin/Sesame}}.
         The returned object is an \astropypkg \texttt{Table}.
     \item \texttt{get\_images} - For services that provide image data, this
-        function accepts an \astropypkg \texttt{SkyCoord} and a radius to search for data
+        method accepts an \astropypkg \texttt{SkyCoord} and a radius to search for data
         that cover the specified target. The returned object is a list
         of \texttt{astropy.io.fits.HDUList} objects.
 
 \end{itemize}
 
-Beyond these basic methods, there is a series of functions with the same
-names, but with the additional suffix \texttt{\_async}.  The
-\texttt{query\_*\_async} functions return a \texttt{requests.Response} object
+We also require a low-level interface to the services so that queries
+with very large results can be handled by other methods (e.g., data streaming)
+if needed.
+The low-level interface consists of a series of methods with the same
+names, but with the additional suffix \texttt{\_async} (e.g.,
+\texttt{query\_async}).  The
+\texttt{query*\_async} methods return a \texttt{requests.Response} object
 from the accessed website, providing developers with
 the ability to access the data in a stream or access only the response
 metadata (i.e., the \texttt{async} methods do not download the corresponding
@@ -286,22 +300,24 @@ data, so they may be useful for collecting metadata for very large files).  The
 \texttt{get\_images\_async} method returns
 \texttt{FileContainer} objects that similarly provide `lazy' access to the
 data, but specifically for FITS files.  Contributors need only implement
-these \texttt{\_async} functions because a wrapper tool exists to convert
-\texttt{\_async} functions into their corresponding non-asynchronous versions.
+these \texttt{\_async} methods because there is a wrapper tool that converts
+\texttt{\_async} methods into their corresponding non-asynchronous versions.
 
 Deviations from this standard API are documented in the \astroquery
-documentation (see Section \ref{sec:documentation}).
+documentation (see Section \ref{sec:documentation}).  Most deviations
+are for services for which \texttt{query\_region} methods are not defined,
+such as atomic and molecular line databases.
 
 \subsection{Caching and login functionality}
-For new module development, there are tools provide to handle various aspects
-of querying that are common across all modules.  The \texttt{BaseQuery}
-metaclass provides tools for caching requests and downloaded data, reducing the
-duration and the network load for repeated queries.  Cached data are
-stored in the user's \texttt{\textasciitilde/.astropy/cache/astroquery} directory.  The
+Astroquery provides tools to handle multiple aspects of querying that are
+common to all modules.  The \texttt{BaseQuery} metaclass provides tools for
+caching requests and downloaded data, reducing the duration and the network
+load for repeated queries.  Cached data are stored in the user's
+\texttt{\textasciitilde/.astropy/cache/astroquery} directory.  The
 \texttt{BaseQuery} metaclass is also responsible for setting the User-Agent (\S
 \ref{sec:useragent}).  The \texttt{QueryWithLogin} metaclass provides a
-framework for secure logging in to services that require user authentication,
-including a credential storage mechanism based on the \texttt{keyring} module.
+framework for logging in securely to services that require user
+authentication, including a credential storage mechanism.
 
 \subsection{Error handling}
 Some queries will inevitably fail.  Failures can take on different modes.  For
@@ -357,10 +373,13 @@ There are several general-use utilities implemented as part of \astroquery, such
 as a bulk FITS file downloader and renamer and a download progressbar (these
 tools complement similar features in \astropypkg).  There
 is also a schema system implemented to allow user-side parameter validation.
+The schema systems are basic syntax-checking tools that verify that the parameters
+the user has input are of the right type and format for the target service;
+for those services without schemas, the user can hypothetically send queries
+that the service will be unable to handle.
 The schema tool is only implemented in the ESO and Vizier modules, but it could
 be expanded to other modules to reduce the number of doomed-to-fail queries
-sent through \astroquery (i.e., it is intended to prevent the user from sending
-queries that the server will be unable to handle).
+sent through \astroquery.
 
 \section{Development history and status}
 \label{sec:development}
@@ -439,9 +458,9 @@ instead of \texttt{from astropy.vo.client import conesearch}).
 \section{Documentation and References}
 \label{sec:documentation}
 \subsection{Online documentation}
-The \astroquery modules are documented online and can be accessed through
-readthedocs at \url{https://astroquery.readthedocs.io/}.
-We include one detailed example of how to use \astroquery in Appendix \ref{sec:example},
+The \astroquery modules are documented online and can be accessed  at
+\url{https://astroquery.readthedocs.io/}.  We include one detailed example of
+how to use \astroquery in Appendix \ref{sec:example},
 but interested users will find many more on the documentation page and
 in the example gallery\footnote{\url{https://astroquery.readthedocs.io/en/latest/gallery.html}}.
 
@@ -455,15 +474,15 @@ modules, which is a helpful practice we encourage.
         including logging in.
     \item \citet{Paletou2014a}: a worked example of querying
         Vizier and SIMBAD to make a surface gravity - effective temperature
-        plot for a star survey
+        plot for a star survey.
     \item \citet{Guillochon2018a}: the definition of
         the Open Astronomy Catalog API and a description of the astroquery
         module built to use it.
     \item
         MAST\footnote{\url{https://github.com/spacetelescope/MAST-API-Notebooks/blob/master/AstroqueryIntro/AstroqueryFunctionalityDemo.ipynb}}:
-        A tutorial on the MAST \astroquery interface
+        A tutorial on the MAST \astroquery interface.
     \item GAIA\footnote{\url{https://gea.esac.esa.int/archive-help/tutorials/python_cluster/index.html}}:
-        A tutorial on the GAIA \astroquery interface
+        A tutorial on the GAIA \astroquery interface.
 \end{itemize}
 
 
@@ -493,16 +512,17 @@ tool is \texttt{fcmaker}, which produces charts for ESO observations using
 
 
 \newpage
+\textbf{\color{red} lstlisting is doing weird stuff with quotation marks! }
 \lstinputlisting[frame=single]{example1.py}
 
 
 \begin{figure*}[!htp]
 \includegraphics[scale=1,width=7in]{example_figure_1.pdf}
-\caption{An example figure made using \astroquery's \texttt{skyview} and
-\texttt{vizier} modules with \astropypkg's \texttt{table}, \texttt{coordinates},
-\texttt{units}, and \texttt{wcs} modules.  The blue stars show sources from
-an older, less complete catalog and the red circles show sources from a more
-recent, more complete catalog.
+\caption{An example figure made using \astroquery.  The \texttt{skyview} package
+was used to download a 2MASS J-band image.  The \texttt{vizier} was used to
+download two star catalogs from different publications and overplot them; the
+blue stars show sources from the older, less complete catalog and the red
+circles show sources from a more recent, more complete catalog.
 }
 \label{fig:example1}
 \end{figure*}
