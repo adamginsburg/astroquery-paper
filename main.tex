@@ -120,6 +120,7 @@ mode, i.e., when the data are taken while the observer is not on-site.
     MPC & Minor Planet Center & \url{https://minorplanetcenter.net/} \\
     NOAO & National Optical Astronomy Observatory & \url{https://www.noao.edu/} \\
     NRAO & National Radio Astronomy Observatory & \url{https://science.nrao.edu/} \\
+    STScI & Space Telescope Science Institute & \url{https://www.stsci.edu/} \\
 \hline
 \hline
     Acronym & Survey & URL \\
@@ -417,12 +418,19 @@ latter moved over from \texttt{astropy.vo} (see Section \ref{sec:vo}).
 JPLHorizons module has been implemented as part of the \texttt{sbpy}
 project\footnote{\url{http://sbpy.org}} with support from NASA PDART grant
 80NSSC18K0987. Further Solar System-related services are planned to be added to
-\astroquery through this support.
-
-\astroquery has received support from the Google Summer of Code
+\astroquery through this support. \astroquery has also received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke)
 from 2013--2014.
 
+Due to its nature as an openly developed package, \astroquery intentionally
+does not have a long-term roadmap for future features. New directions are primarily 
+driven by contributors and data providers adding or updating modules to reflect new 
+or changed data  sources. The underlying software architecture has been demonstrably
+sufficient to meet the needs of the  current generation of data sources (proven by  
+the user base of \astroquery).
+While this may change in the future, the user-focused nature of \astroquery means
+that making such changes is unnecessary until there are specific data sources or use cases
+to drive such a change.
 
 
 \subsection{Relation to the VO}
@@ -495,7 +503,8 @@ modules, which is a helpful practice we encourage.
 data through Python.  It is part of the \astropypkg affiliated package system.
 We have described its general layout, its development model, and its role in
 developing reproducible workflows.  \astroquery is developed for and by our
-community: we welcome any new contributions.
+community: we welcome any new contributions, and such contributions will continue
+to define the future directions of the package.
 
 
 \bibliographystyle{aasjournal}
