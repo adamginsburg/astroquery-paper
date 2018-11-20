@@ -101,42 +101,58 @@ ground and space based telescopes.  These data archives also serve as the
 primary means for serving data to users when the data are taken in queue
 mode, i.e., when the data are taken while the observer is not on-site.
 
-\begin{table*}[htp]
-\centering
-\caption{List of Organizations \& Surveys}
-\begin{tabular}{lll}
-\label{tab:surveys}
-    Acronym & Organization & URL \\
-\hline
-    CADC & Canadian Astronomy Data Center & \url{http://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/} \\
-    CDS & Centre de Données astronomiques de Strasbourg & \url{http://cds.u-strasbg.fr/} \\
-    CXC & Chandra X-ray Center & \url{http://cxc.harvard.edu/} \\
-    ESA & European Space Agency & \url{https://www.esa.int/} \\
-    ESO & European Southern Observatory & \url{https://www.eso.org/} \\
-    HEASARC & High Energy Astrophysics Science Archive Research Center & \url{https://heasarc.gsfc.nasa.gov/} \\
-    IPAC & Infrared Processing and Analysis Center & \url{https://www.ipac.caltech.edu/} \\
-    JPL & Jet Propulsion Laboratory & \url{https://www.jpl.nasa.gov/} \\
-    MAST & Mikulski Archive for Space Telescopes & \url{https://archive.stsci.edu/} \\
-    MPC & Minor Planet Center & \url{https://minorplanetcenter.net/} \\
-    NOAO & National Optical Astronomy Observatory & \url{https://www.noao.edu/} \\
-    NRAO & National Radio Astronomy Observatory & \url{https://science.nrao.edu/} \\
-    STScI & Space Telescope Science Institute & \url{https://www.stsci.edu/} \\
-\hline
-\hline
-    Acronym & Survey & URL \\
-\hline
-    COBE & Cosmic Background Explorer & \url{https://lambda.gsfc.nasa.gov/product/cobe/}\\
-    SDSS & Sloan Digital Sky Survey & \url{https://www.sdss.org/} \\
-    2MASS & Two Micron All-Sky Survey & \url{https://www.ipac.caltech.edu/project/2mass} \\
-    UKIDSS & UKIRT Infrared Deep Sky Survey & \url{http://wsa.roe.ac.uk/}\\
-    VSA & Vista Science Archive & \url{http://vsa.roe.ac.uk/}\\
-    WMAP & Wilkinson Microwave Anisotropy Probe & \url{https://map.gsfc.nasa.gov/}\\
-    & Planck & \url{https://pla.esac.esa.int/}\\
-\end{tabular}
 
-
-\par 
-\end{table*}
+\begin{deluxetable*}{lp{8.5cm}ll}
+  \tablecaption{List of all Services \& Surveys \astroquery modules support.}
+  \label{tab:surveys}
+  \tablehead{Module name & Sercive or Organization & URL}
+  \startdata
+  \package{alfalfa} &  ALFALFA data repository & \url{http://arecibo.tc.cornell.edu/hiarchive/alfalfa} \\
+  \package{alma} &  Atacama Large Millimeter/submillimeter Array Archive & \url{http://almascience.org} \\
+  \package{atomic} &  Atomic Line List & \url{http://www.pa.uky.edu/~peter/atomic} \\
+  \package{besancon} & Besancon model of the Galaxy& \url{http://model.obs-besancon.fr} \\
+  \package{cds}  & Centre de Données astronomiques de Strasbourg & \url{http://cds.u-strasbg.fr} \\
+  \package{cosmosim} & CosmoSim database & \url{https://www.cosmosim.org/uws/query} \\
+  \package{esasky} &  ESASky of the European Space Agency & \url{http://sky.esa.int} \\
+  \package{eso} & European Southern Observatory Science Archive & \url{http://archive.eso.org/cms.html} \\
+  \package{exoplanet\_orbit\_database} & Exoplanet Orbit Database& \url{http://exoplanets.org}\\
+  \package{fermi} & Fermi Gamma-ray Space Telescope Data & \url{https://fermi.gsfc.nasa.gov/ssc/data} \\
+  \package{gaia} & Gaia Archive of the European Space Agency & \url{https://gea.esac.esa.int/archive} \\
+  \package{gama} & Galaxy and Mass Assembly Survey & \url{http://www.gama-survey.org/dr2/query} \\
+  \package{heasarc} &  High Energy Astrophysics Science Archive Research Center & \url{https://heasarc.gsfc.nasa.gov} \\
+  \package{hitran} & HIgh-resolution TRANsmission molecular absorption database & \url{http://hitran.org/hapi} \\
+  \package{ibe} & IRSA Image Server & \url{http://irsa.ipac.caltech.edu/ibe} \\
+  \package{irsa} & IRSA Catalog Query Service & \url{https://irsa.ipac.caltech.edu} \\
+  \package{irsa\_dust} & IRSA Galactic Dust Reddening and Extinction Query & \url{https://irsa.ipac.caltech.edu/applications/DUST} \\
+  \package{jplhorizons} & JPL's HORIZONS system  & \url{https://ssd.jpl.nasa.gov/horizons_batch.cgi} \\
+  \package{jplsbdb} &JPL's Small-Body DataBase  & \url{https://ssd-api.jpl.nasa.gov/doc/sbdb.html} \\
+  \package{jplspec} &JPL's Spectral Catalog  & \url{https://spec.jpl.nasa.gov/cgi-bin/catform} \\
+  \package{lamda} & Leiden Atomic and Molecular Database & \url{http://home.strw.leidenuniv.nl/~moldata} \\
+  \package{magpis} & The Multi-Array Galactic Plane Imaging Survey & \url{https://third.ucllnl.org/gps} \\
+  \package{mast} & Barbara A. Mikulski Archive for Space Telescopes & \url{https://mast.stsci.edu} \\
+  \package{mpc} & Minor Planet Center Ephemeris Service & \url{https://minorplanetcenter.net} \\
+  \package{nasa\_ads} & SAO/NASA Astrophysics Data System & \url{https://api.adsabs.harvard.edu} \\
+  \package{nasa\_exoplanet\_archive} &NASA Exoplanet Archive  & \url{https://exoplanetarchive.ipac.caltech.edu} \\
+  \package{ned} & NASA Extragalactic Database & \url{https://ned.ipac.caltech.edu} \\
+  \package{nist} &NIST Atomic Spectra Database  & \url{https://physics.nist.gov/PhysRefData/ASD} \\
+  \package{nrao} &  National Radio Astronomy Observatory Data Archive & \url{https://archive.nrao.edu/archive}\\
+  \package{nvas} & NRAO VLA Archive Survey Images Page & \url{https://archive.nrao.edu/nvas} \\
+  \package{oac} & Open Astronomy Catalog & \url{https://astrocats.space} \\
+  \package{ogle} & Interstellar Extinction toward the Galactic Bulge from OGLE-III data & \url{http://ogle.astrouw.edu.pl/cgi-ogle/getext.py} \\
+  \package{open\_exoplanet\_catalogue} & Open Exoplanet Catalogue & \url {http://openexoplanetcatalogue.com} \\
+  \package{sdss} & Sloan Digital Sky Survey & \url{http://skyserver.sdss.org}\\
+  \package{sha} & Spitzer Heritage Archive & \url{http://sha.ipac.caltech.edu/applications/Spitzer/SHA } \\
+  \package{simbad} & CDS SIMBAD Astronomical Database & \url{http://simbad.u-strasbg.fr}\\
+  \package{skyview} & NASA's SkyView Query  & \url{ http://skyview.gsfc.nasa.gov} \\
+  \package{splatalogue} & Splatalogue Database for astronomical spectroscopy query & \url{https://www.cv.nrao.edu/php/splat} \\
+  \package{ukidss} & UKIRT Infrared Deep Sky Survey & \url{http://wsa.roe.ac.uk}\\
+  \package{vamdc} & VAMDC molecular line database & \url{https://vamdclib.readthedocs.io/} \\
+  \package{vizier} & CDS VizieR Astronomical Catalogues & \url{http://vizier.u-strasbg.fr} \\
+  \package{vo\_conesearch} &Simple Cone Search Databases & \url{https://astropy.stsci.edu/aux/vo_databases} \\
+  \package{vsa} & Vista Science Archive & \url{http://vsa.roe.ac.uk}\\
+  \package{xmatch} & CDS X-Match Servic & \url{http://cdsxmatch.u-strasbg.fr} \\
+  \enddata
+\end{deluxetable*}
 
 In addition to observatories and telescopes, individual surveys often share
 their full data sets.  In some cases, these data sets are shared via the
