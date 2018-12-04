@@ -173,7 +173,7 @@ MAGPIS;][]{Helfand2006}.
 Finally, there are other data types relevant to astronomy that are not
 served by the typical astronomical databases.  Examples include databases of
 molecular and atomic properties, such as those provided by Splatalogue and
-the NIST Atomic Spectra Database, bibliographic databases such as 
+the NIST Atomic Spectra Database, bibliographic databases such as
 the NASA Astrophysics Data System (ADS), or services that are computationally
 intensive or require constant updates, like Solar System ephemerides
 provided by services like JPL HORIZONS, or the Minor Planet Center.
@@ -227,7 +227,7 @@ In this example, \texttt{Simbad} is an instance of \\
 This common interface allows users to use different services and process
 the resulting data in the same manner despite the differences in the underlying
 methods and services (e.g., \texttt{SDSS.query\_region()},
-\texttt{Simbad.query\_region()}, \texttt{NED.query\_region()}, etc.) 
+\texttt{Simbad.query\_region()}, \texttt{NED.query\_region()}, etc.)
 
 While there is a common suggested API described in the \texttt{template\_module},
 individual packages are not \emph{required} to support this API because, for
@@ -434,19 +434,19 @@ Astroquery also receives contributions from other funded programs. For instance,
 JPLHorizons module has been implemented as part of the \texttt{sbpy}
 project\footnote{\url{http://sbpy.org}} with support from NASA PDART grant
 80NSSC18K0987. Further Solar System-related services are planned to be added to
-astroquery through this support. Astroquery has also received support from the Google Summer of Code
-program, with two students (co-authors Madhura Parikh and Simon Liedtke)
-from 2013--2014.
+astroquery through this support. Astroquery has also received support from the
+Google Summer of Code program, with two students (co-authors Madhura Parikh and
+Simon Liedtke) from 2013--2014.
 
 Due to its nature as an openly developed package, astroquery intentionally does
 not have a long-term roadmap for future features. New directions are primarily
 driven by contributors and data providers adding or updating modules to reflect
 new or changed data  sources. The underlying software architecture has been
 demonstrably sufficient to meet the needs of the  current generation of data
-sources (proven by the user base of astroquery).  While this may change in the
-future, the user-focused nature of astroquery means that making such changes is
-unnecessary until there are specific data sources or use cases to drive such a
-change.
+sources (proven by the user base of astroquery).  While this policy may change
+in the future, the user-focused nature of astroquery means that making such
+architecture changes is unnecessary until there are specific data sources or
+use cases to drive them.
 
 
 \subsection{Relation to the VO}
@@ -521,6 +521,42 @@ We have described its general layout, its development model, and its role in
 developing reproducible workflows.  Astroquery is developed for and by our
 community: we welcome any new contributions, and such contributions will continue
 to define the future directions of the package.
+
+\acknowledgements
+
+We would like to thank the members of the community that have contributed to
+\astroquery, that have opened issues and provided feedback, and have
+supported the project in a number of different ways. We are greatful for the
+infrastructural support the \astropy community provides.  \astroquery is
+supported by and makes use of a number of organizations and services outside
+the traditional academic community: GitHub, Travis CI, Appveyor, and Read
+the Docs. Our package relies heavily on the following Python dependencies,
+we are greatful for their maintainers and contributors: \package{requests}
+\package{beautifulsoup}, and \package{keyring}.
+
+We thank Google for financing and organizing the Google Summer of Code
+program, that has funded 2 students (SL, and MP) to work on \astroquery in
+2013 and 2014.
+
+The following individuals would like to recognize support for their personal
+contributions. BMS is supported by the NSF grant AST-1715122 and
+acknowledges support from the DIRAC Institute in the Department of Astronomy
+at the University of Washington. The DIRAC Institute is supported through
+generous gifts from the Charles and Lisa Simonyi Fund for Arts and Sciences,
+and the Washington Research Foundation. MM, MVB, GG contributions are
+supported by the NASA PDART grant 80NSSC18K0987.
+
+\software{\astropy \citep{Astropy-Collaboration2018},
+  \package{numpy} \citep{numpy},
+  \package{requests},
+  \package{keyring},
+  \package{beautifulsoup4},
+  \package{html5lib},
+  \package{matplotlib} \citep{matplotlib},
+  \package{APLpy} \citep{aplpy},
+  \package{pyregions} \citep{pyregions},
+  \package{regions} \citep{regions}
+}
 
 
 \bibliographystyle{aasjournal}
