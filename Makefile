@@ -23,3 +23,9 @@ main.tex:
 	#cp authorea_build/authorea_paper.pdf main.pdf
 	gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=main_compressed.pdf main.pdf
 
+diff:
+	git show 63e21c1e134a9790f781cbf89539472643457d42:main.tex > main_submitted.tex
+	latexdiff main.tex main_submitted.tex > diff.tex
+	${PDFLATEX} diff.tex
+	${PDFLATEX} diff.tex
+	${PDFLATEX} diff.tex
