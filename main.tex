@@ -58,7 +58,7 @@ from browser-based to command-line interaction easy.
 has received significant contributions from throughout the astronomical community,
 including several significant contributions from telescope archives.
 \astroquery enables the creation of fully reproducible workflows from data
-acquisition through publication.  This document describes the philosophy, basic
+acquisition through publication.  This paper describes the philosophy, basic
 structure, and development model of the \astroquery package.
 The complete documentation for astroquery can be found at
 \url{http://astroquery.readthedocs.io/}.
@@ -77,7 +77,7 @@ In the past few decades, large-scale surveys have played a huge role in
 advancing our understanding of the universe, and these surveys have produced
 enormous reservoirs of data that astronomers regularly access.  However, tools
 for accessing these reservoirs are heterogeneous and often only available via
-graphical user interfaces (GUIs) such as web sites.
+graphical user interfaces (GUIs) or web sites.
 
 One of the cornerstones of research is reproducibility. To be able to reproduce
 research, the data need to be available to everyone. Many scientific journals
@@ -91,7 +91,7 @@ good way to make all the different data more accessible, and it provides
 authors with the ability to make the full analysis process they used -- from
 data download to publication -- repeatable.  A centrally maintained library
 also safeguards against inevitable `link rot' on data archives, moving some of
-the responsibility for maintaining long-term reproducibility from the
+the responsibility for maintaining long-term reproducibility from each
 individual researcher to the broader community.
 
 Data sharing has taken on a variety of forms.  The most prominent are the
@@ -167,15 +167,15 @@ Individual teams and small groups often share their data via their own
 custom websites.  These services do not follow any particular standard and can
 be widely varied in the type and amount of data shared.  Sometimes these data
 are shared via the archive systems (e.g., IRSA at IPAC hosts many individual
-survey data sets), while others use their own web hosting systems \citep[e.g.,
-MAGPIS;][]{Helfand2006}.
+survey data sets), while others use their own web hosting systems (e.g.,
+MAGPIS).
 
 Finally, there are other data types relevant to astronomy that are not
 served by the typical astronomical databases.  Examples include databases of
 molecular and atomic properties, such as those provided by Splatalogue and
 the NIST Atomic Spectra Database, bibliographic databases such as
 the NASA Astrophysics Data System (ADS), or services that are computationally
-intensive or require constant updates, like Solar System ephemerides
+intensive or require regular updates, like Solar System ephemerides
 provided by services like JPL HORIZONS, or the Minor Planet Center.
 
 \astroquery arose from a desire to access these databases from the Python
@@ -208,8 +208,8 @@ For new module development, there is a \texttt{template\_module} consisting of a
 folder with several individual python code files that lays
 out the basic framework of any new module.  All modules have a single core
 \texttt{class} that has some number of \texttt{query\_*} methods.
-The most common query methods are \texttt{query\_region}, which usually
-provide a ``cone search'' functionality, i.e., they search for data within a
+The most common query method is \texttt{query\_region}, which usually
+provides a ``cone search'' functionality, i.e., they search for data within a
 circular region. The results of
 the queries then are returned in an \astropypkg
 \citep{Astropy-Collaboration2018, Astropy-Collaboration2013}
@@ -360,7 +360,8 @@ by either implementing workarounds to known issues or correctly informing
 users of the problem.
 
 \subsection{Testing}
-Astroquery testing is somewhat different from most other packages in the Python
+Astroquery testing is somewhat different from most other packages in the
+scientific Python
 ecosystem.  While the tests are based on the astropy testing infrastructure and use
 pytest to run and check the outputs, the astroquery tests are split into
 \emph{remote} and \emph{local}.  The remote tests exactly replicate what a user
@@ -439,15 +440,15 @@ support. Astroquery has also received support from the Google Summer of Code
 program, with two students (co-authors Madhura Parikh and Simon Liedtke) from
 2013--2014.
 
-Due to its nature as an openly developed package, astroquery intentionally does
-not have a long-term roadmap for future features. New directions are primarily
-driven by contributors and data providers adding or updating modules to reflect
-new or changed data  sources. The underlying software architecture has been
-demonstrably sufficient to meet the needs of the  current generation of data
-sources (proven by the user base of astroquery).  While this policy may change
-in the future, the user-focused nature of astroquery means that making such
-architecture changes is unnecessary until there are specific data sources or
-use cases to drive them.
+Due to its nature as an openly developed package, new directions in
+astroquery are primarily driven by contributors and data providers adding or
+updating modules to reflect new or changed data sources. The underlying
+software architecture has been demonstrably sufficient to meet the needs of
+the current generation of data sources (proven by the user base of
+astroquery).  While this policy may change in the future, the user-focused
+nature of astroquery means that making such architecture changes is
+unnecessary until there are specific data sources or use cases to drive
+them.
 
 
 \subsection{Relation to the VO}
