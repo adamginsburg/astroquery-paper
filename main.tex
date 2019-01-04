@@ -292,16 +292,16 @@ Each service is expected to provide the following interfaces, assuming they are
 applicable:
 
 \begin{itemize}
-    \item \texttt{query\_region} - A method that accepts an \astropypkg
+    \item \texttt{query\_region} - A method that accepts an \astropy
         \texttt{SkyCoord} object representing a point on the sky plus a
         specification of the radius around which to search.
-        The returned object is an astropy table.
+        The returned object is an \astropy table.
     \item \texttt{query\_object} - A method that accepts the name of an
         object.  This method relies on the service to resolve the object name, i.e., it does not use a name resolver
         like \texttt{SESAME}.\footnote{\url{http://cds.u-strasbg.fr/cgi-bin/Sesame}}
-        The returned object is an astropy table.
+        The returned object is an \astropy table.
     \item \texttt{get\_images} - For services that provide image data, this
-        method accepts an astropy \texttt{astropy.coordinates.SkyCoord} object
+        method accepts an \astropy \texttt{SkyCoord} object
         and a radius to search for data that cover the specified target. The
         returned object is a list of \texttt{astropy.io.fits.HDUList} objects.
 
@@ -362,7 +362,7 @@ users of the problem.
 \subsection{Testing}
 Astroquery testing is somewhat different from most other packages in the
 scientific Python
-ecosystem.  While the tests are based on the astropy testing infrastructure and use
+ecosystem.  While the tests are based on the \astropy testing infrastructure and use
 pytest to run and check the outputs, the astroquery tests are split into
 \emph{remote} and \emph{local}.  The remote tests exactly replicate what a user
 would enter at the command line, but they are dependent on the stability of the
@@ -373,7 +373,8 @@ services to be accessible simultaneously.\footnote{While this issue affects
 testing, it rarely affects users, since simply retrying a query is often
 enough to fix user issues.  When the servers are simply down or broken,
 astroquery is affected, and the resulting errors are sometimes unpredictable;
-users are encouraged to report such failures as Issues so that better error
+users are encouraged to report such failures as github issues
+(\url{https://github.com/astropy/astroquery/issues}) so that better error
 messages can be provided.} We therefore require that each
 module provide some tests that do not rely on having an internet connection.
 These tests rely on \emph{monkeypatching}\footnote{Monkeypatching is the
@@ -393,7 +394,7 @@ helps reduce the burden on the remote services.
 \subsection{Other utilities}
 There are several general-use utilities implemented as part of astroquery, such
 as a bulk FITS file downloader and renamer and a download progressbar (these
-tools complement similar features in astropy).  There
+tools complement similar features in \astropy).  There
 is also a schema system implemented to allow user-side parameter validation.
 The schema systems are basic syntax-checking tools that verify that the parameters
 the user has input are of the right type and format for the target service;
@@ -411,15 +412,15 @@ section describes how astroquery has been developed, but we welcome all sorts
 of new contributions, including new modules, upgrades to existing modules, and
 minor corrections to existing tools from both individuals and institutions.
 
-Astroquery is an astropy coordinated package \citep{APE15} and is a critical
-component of the astropy Project ecosystem \citep{Astropy-Collaboration2018}.
+Astroquery is an \astropy coordinated package \citep{APE15} and is a critical
+component of the \astropy Project ecosystem \citep{Astropy-Collaboration2018}.
 It is a standalone project and will remain independent of the \astropypkg core
-package,\footnote{Many astropy affiliated packages are developed with the
+package,\footnote{Many \astropy affiliated packages are developed with the
 intent of eventually including them in the core of \astropypkg.  In contrast,
 astroquery intends to remain a separate package indefinitely largely because
 of its need to rapidly adapt to changes in the remote services; \astropypkg
 cannot make such rapid changes because users rely on its stability.} but is
-coordinated by the Astropy Project to ensure sustainability and maintenance.
+coordinated by the \astropy Project to ensure sustainability and maintenance.
 
 Astroquery has received contributions from 77 people as of August 2018.  While
 the primary maintenance burden is shouldered by two people at any given time
@@ -473,9 +474,9 @@ to use the more sophisticated VO tools that underly these tools.
 
 
 Some general VO tools are available in astroquery.  The \texttt{vo\_conesearch}
-package, which originally resided in astropy, is now part of astroquery.  VO
+package, which originally resided in \astropy, is now part of astroquery.  VO
 Cone Search has a \texttt{query\_region} interface like the other astroquery
-services in addition to the existing interfaces ported over from astropy.
+services in addition to the existing interfaces ported over from \astropy.
 As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists; therefore,
 astroquery is now the primary provider of this VO Cone Search service. From a
 typical user's standpoint, switching over from \texttt{astropy.vo} should
@@ -537,7 +538,7 @@ we are grateful for their maintainers and contributors: \package{requests}
 \package{beautifulsoup}, and \package{keyring}.
 
 We thank Google for financing and organizing the Google Summer of Code
-program, that has funded 2 students (SL, and MP) to work on \astroquery in
+program, that has funded two students (SL, and MP) to work on \astroquery in
 2013 and 2014.
 
 The following individuals would like to recognize support for their personal
