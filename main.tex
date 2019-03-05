@@ -120,7 +120,7 @@ mode, i.e., when the data are taken while the observer is not on-site.
   \package{gaia} & Gaia Archive of the European Space Agency & \url{https://gea.esac.esa.int/archive} \\
   \package{gama} & Galaxy and Mass Assembly Survey & \url{http://www.gama-survey.org/dr2/query} \\
   \package{heasarc} &  High Energy Astrophysics Science Archive Research Center & \url{https://heasarc.gsfc.nasa.gov} \\
-  \package{hitran} & HIgh-resolution TRANsmission molecular absorption database & \url{http://hitran.org/hapi}, \citep{Kochanek2016a} \\
+  \package{hitran} & HIgh-resolution TRANsmission molecular absorption database & \url{http://hitran.org/hapi}, \citet{Kochanov2016a} \\
   \package{ibe} & IRSA Image Server & \url{http://irsa.ipac.caltech.edu/ibe} \\
   \package{irsa} & IRSA Catalog Query Service & \url{https://irsa.ipac.caltech.edu} \\
   \package{irsa\_dust} & IRSA Galactic Dust Reddening and Extinction Query & \url{https://irsa.ipac.caltech.edu/applications/DUST} \\
@@ -203,6 +203,8 @@ interface, but are meant to be used independently.  They are primarily based on
 a common framework that uses the Python
 \package{requests}\footnote{\url{http://docs.python-requests.org/}} package to
 perform HTTP requests to communicate with web services.
+A list of supported services at the time of publication is given in Table
+\ref{tab:surveys}.
 
 For new module development, there is a \texttt{template\_module} consisting of a
 folder with several individual python code files that lays
@@ -232,7 +234,7 @@ methods and services (e.g., \texttt{SDSS.query\_region()},
 While there is a common suggested API described in the \texttt{template\_module},
 individual packages are not \emph{required} to support this API because, for
 some, it is not possible.  For example, the atomic and molecular databases refer
-to physical data that is not related to positions on the sky and therefore
+to physical data that are not related to positions on the sky and therefore
 their \astroquery modules cannot include \texttt{query\_region} methods. The
 same applies to Solar System object ephemerides queries. Differences in the API
 are discussed in the \astroquery documentation (see Section
@@ -273,7 +275,7 @@ v0.3.9, to accompany the publication of this paper.
 \astroquery identifies itself to host services using the \texttt{HTTP
 User-Agent} header data, which is automatically produced and sent to the
 archives with every request.
-Users do not need to be aware of this metadata being sent with their
+Users do not need to be aware of these metadata being sent with their
 queries, but the information can be used by data hosting services to determine
 how many users are accessing their service via \astroquery and to assist in
 debugging if improper queries are being submitted.
@@ -474,7 +476,7 @@ to use the more sophisticated VO tools that underly these tools.
 
 
 Some general VO tools are available in astroquery.  The \texttt{vo\_conesearch}
-package, which originally resided in \astropy, is now part of astroquery.  VO
+package, which originally resided in \astropypkg, is now part of astroquery.  VO
 Cone Search has a \texttt{query\_region} interface like the other astroquery
 services in addition to the existing interfaces ported over from \astropy.
 As of \astropypkg 3.0, \texttt{astropy.vo} no longer exists; therefore,
@@ -519,7 +521,7 @@ modules, which is a helpful practice we encourage.
 
 \section{Summary}
 Astroquery is a toolkit for accessing remotely hosted astronomical
-data through Python.  It is part of the \astropypkg affiliated package system.
+data through Python.  It is part of the \astropy affiliated package system.
 We have described its general layout, its development model, and its role in
 developing reproducible workflows.  Astroquery is developed for and by our
 community: we welcome any new contributions, and such contributions will continue
@@ -533,7 +535,7 @@ supported the project in a number of different ways. We are grateful for the
 infrastructural support the \astropy community provides.  \astroquery is
 supported by and makes use of a number of organizations and services outside
 the traditional academic community: GitHub, Travis CI, Appveyor, and Read
-the Docs. Our package relies heavily on the following Python dependencies,
+the Docs. Our package relies heavily on the following Python dependencies;
 we are grateful for their maintainers and contributors: \package{requests}
 \package{beautifulsoup}, and \package{keyring}.
 
@@ -570,7 +572,7 @@ supported by the NASA PDART grant 80NSSC18K0987.
 \label{sec:example}
 In this appendix, we show an example of astroquery in action, highlighting the
 ability to use multiple modules and interact with \astropypkg's table, coordinate,
-and unit tools.  This example approximately reproduces Figure 1 of
+and unit tools.  This example, shown in Figure 1, approximately reproduces Figure 1 of
 \citet{Eisner2016a}, but with a different background.  It can also be found on
 astroquery's gallery page
 (\url{http://astroquery.readthedocs.io/en/latest/gallery.html}).
